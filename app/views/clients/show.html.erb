@@ -1,0 +1,101 @@
+<div style="width:60%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h1> <%= @client.name %> </h1>
+	        </div>
+	    </div>
+	</div>
+
+<div class="listado caja" style="width:100%; text-align: center;" >
+	Identidad <b> <%=@client.identity %> &nbsp;&nbsp;&nbsp;</b> Telefono <b> <%=@client.telephone %>&nbsp;&nbsp;&nbsp; </b> 
+	Direccion <b> <%=@client.address %> </b><br>
+	<%= link_to "Editar",edit_client_path(@client),:class => "editar" %> 
+</div>
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Atributos Asignados</h2>
+	        </div>
+	    </div>
+	</div>
+
+<div>
+<div class="listado caja" style="width:100%; text-align: left;">
+	<table>
+	<% @caa.each do |cat|  
+		
+		att = Property.where("id=#{cat.property_id}").select('name')
+		att.each do |a| %>
+
+			<tr><td><%= a.name %>:</td>
+		<%end%>
+
+			<td><b><%= cat.value %></b><br></td>
+		</tr>
+	<%end%>
+	</table>
+</div>
+</div>
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Asignar Atributo</h2>
+	        </div>
+	    </div>
+	</div>
+
+<div>
+	<%= form_for(@ca) do |f| %>
+	<% @ca.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+		<%end%>
+		<div class="field">
+			<%= f.collection_select :property_id, Property.all, :id,:name, {prompt: 'Seleccione Atributo'}, class:"form-control" %>
+		</div>
+		<div class="field">
+			<%= f.text_field:value, placeholder: "Valor", class:"form-control"%>
+		</div>
+		<%= f.hidden_field:client_id, :value => @client.id %>
+				
+		<div class="field">
+			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Actividades</h2>
+	        </div>
+	    </div>
+	</div>
+
+<div>
+
+<div>
+	<%= form_for(@act) do |f| %>
+		<div class="field">
+		<%= f.text_area:description, placeholder: "descripcion", class:"form-control"%>
+		</div>
+		<%= f.hidden_field:client_id, :value => @client.id %>
+		<div class="field">
+			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+<div>
+	<% @activites.each do |a|  
+		input = a.created_at
+		input=input.strftime("%d/%m/%y %H:%M") 
+		%>
+	<div class="listado caja">
+		<%=a.description %><br>
+		<span class="editar"><%= input %></span>
+	</div><br>
+<%end%>
+</div>
+
+
+</div>
+

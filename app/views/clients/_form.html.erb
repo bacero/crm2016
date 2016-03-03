@@ -1,0 +1,30 @@
+<div style="width:60%; margin:0 auto;">
+<h1><%= name %></h1>
+<%= form_for(@client) do |f| %>
+	<% @client.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+	<%end%>
+	<div class="field">
+		<%= f.text_field:name, placeholder: "Nombre", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.text_area:identity, placeholder: "Identidad", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.text_area:telephone, placeholder: "Telefono", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.text_area:address, placeholder: "Direccion", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.collection_select :state_id, State.all, :id,:name, {prompt: 'Seleccione Estado'}, class:"form-control" %>
+	</div>
+	<div class="field">
+		<%= f.collection_select :type_client_id, TypeClient.all, :id,:name, {prompt: 'Seleccione Tipo'}, class:"form-control" %>
+	</div>
+	<div class="field">
+		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+	</div>
+
+<%end%>
+</div>

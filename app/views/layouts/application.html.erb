@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRM</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<header>
+		<nav class="be-red white large-padding"> 
+			<ul class="no-list row center-xs middle">
+				<li class="col-md">
+					<h1 class="no-margin" id="logo">CRM2016</h1>
+				</li>
+				<li class="col-md"><%= link_to "Inicio",root_path %></li>
+				<li class="col-md"><%= link_to "Atributos",properties_path %></li>
+				<li class="col-md"><%= link_to "Tipo Clientes",type_clients_path %></li>
+				<li class="col-md"><%= link_to "Clientes",clients_path %></li>	
+				<li class="col-md"><%= link_to "Areas",areas_path %></li>	
+				<li class="col-md"><%= link_to "Proyectos",projects_path %></li>				
+			</ul>
+		</nav>
+
+	</header>
+
+<%= yield %>
+
+</body>
+</html>

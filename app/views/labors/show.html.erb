@@ -1,0 +1,120 @@
+<div style="width:60%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h1> <%= @labor.name %> </h1>
+	        </div>
+	    </div>
+	</div>
+	<div>
+		<table>
+			<tr>
+				<th>Descripcion</th><td><%= @labor.description %></td>
+			</tr>
+			<tr>
+				<th>Descripcion Indicador</th><td><%= @labor.indicator_description %></td>
+			</tr>
+			<tr>
+				<th>Indicador</th><td><%= @labor.indicator %></td>
+			</tr>
+			<tr>
+				<th>Inicio</th><td><%= @labor.initiation %></td>
+			</tr>
+			<tr>
+				<th>Fin</th><td><%= @labor.ending  %></td>
+			</tr>
+		</table>
+	</div>
+<div>
+	<% @observations.each do |o|  %>		
+	<div class="listado caja">
+		<%=o.description %><br>
+	</div><br>
+<%end%>
+</div>
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h2> Historial de Cambios </h2>
+	        </div>
+	    </div>
+	</div>
+
+	<% @changes.each do |c|  %>
+	<div class="listado caja">
+		<table>
+			<tr>
+				<th>Campo</th>
+				<th>Dato Viejo</th>
+				<th>Dato Nuevo</th>
+				<th>Fecha</th>
+			</tr>
+			<tr>
+				<td><%= c.property %></td>
+				<td><%=c.previus %></td>
+				<td><%=c.mint %></td>
+				<td><%=c.created_at.strftime("%m-%d-%Y")  %></td>
+			</tr>
+		</table>
+			
+	</div>
+	<br>
+	<%end%>
+
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Observaciones</h2>
+
+	        </div>
+	    </div>
+	</div>
+
+<div>
+<p>esto solo lo creara el usuario registrado</p>
+<div>
+	<%= form_for(@comment) do |f| %>
+		<div class="field">
+		<%= f.text_area:description, placeholder: "descripcion", class:"form-control"%>
+		</div>
+		<%= f.hidden_field:labor_id, :value => @labor.id %>
+		<%= f.hidden_field:kind, :value => "1" %>
+		<div class="field">
+			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+
+
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Comentarios</h2>
+
+	        </div>
+	    </div>
+	</div>
+
+<div>
+<div>
+	<%= form_for(@comment) do |f| %>
+		<div class="field">
+		<%= f.text_area:description, placeholder: "descripcion", class:"form-control"%>
+		</div>
+		<%= f.hidden_field:labor_id, :value => @labor.id %>
+		<%= f.hidden_field:kind, :value => "2" %>
+		<div class="field">
+			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+<div>
+	<% @comnents.each do |o|  %>		
+	<div class="listado caja">
+		<%=o.description %><br>
+	</div><br>
+<%end%>
+</div>
+
+</div>
+

@@ -1,0 +1,35 @@
+<div style="width:80%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	            <h1>Clientes</h1>
+	        </div>
+	    </div>
+	</div>
+<% @client.each do |cli|  %>
+	<div class="listado caja">
+		<b><%= link_to cli.name,cli %></b>
+		<br> 
+		<% 
+		  idd=cli.type_client_id
+		   type=TypeClient.where("id=#{idd}").select('name')
+		   input = cli.created_at
+		   input=input.strftime("%d/%m/%y") 
+		 %>
+
+		<% type.each do |x|  %>
+			Tipo:<%= x.name %>
+		<%end%>
+		<span class="editar">Creado:<%= input %>
+		<% 
+		   input = cli.updated_at
+		   input=input.strftime("%d/%m/%y") # => 05:21
+		 %>
+		
+		  Actualizado:<%= input %></span>
+	</div><br>
+<%end%>
+<div class=' listado izquierdo'>
+	<%= link_to 'Crear Nuevo', new_client_path %>
+</div>
+</div>

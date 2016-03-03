@@ -1,0 +1,21 @@
+<div style="width:60%; margin:0 auto;">
+<h1><%= name %></h1>
+<%= form_for(@tc) do |f| %>
+	<% @tc.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+	<%end%>
+	<div class="field">
+		<%= f.text_field:name, placeholder: "Nombre", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.text_area:description, placeholder: "description", class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.collection_select :state_id, State.all, :id,:name, {prompt: 'Seleccione Estado'}, class:"form-control"%>
+	</div>
+	<div class="field">
+		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+	</div>
+
+<%end%>
+</div>

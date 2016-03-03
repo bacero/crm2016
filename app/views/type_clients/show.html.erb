@@ -1,0 +1,50 @@
+<div style="width:60%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h1><%= @tc.name %></h1>
+	        </div>
+	    </div>
+	</div>
+	<div class="listado caja">
+		
+		<p class="lisp" ><%= @tc.description %></p>
+		<div class='izquierdo'>
+			<%= link_to "Editar",edit_type_client_path(@tc),:class => "editar" %>
+		</div>
+	</div>
+	<div class="listado ">
+		<h2>Atributos Asignados</h2>
+		<div>
+			<% @caa.each do |cat|  
+				att = Property.where("id=#{cat.property_id}").select('name')
+				att.each do |a| %>
+					<%= a.name %>
+				<%end%>
+
+
+			<%end%>
+		</div>
+		<h3>Agregar Atributos</h3>
+		<div>
+			<%= form_for(@la) do |f| %>
+				<% @la.errors.full_messages.each do |message|%>
+						<div class="be-alert white">*<%= message %></div>
+					<%end%>
+
+					<% 
+					@att=Property.all
+					@att.each do |a| %>
+				      <div>
+				      <%= check_box_tag "property_id[]", a.id %> <%= a.name %> 
+				      </div>
+				  	<% end %>
+					<%= f.hidden_field:type_client_id, :value => @tc.id %>
+					
+					<div class="field">
+						<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+					</div>
+				<%end%>
+		</div>
+	</div>	
+</div>

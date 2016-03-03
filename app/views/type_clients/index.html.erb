@@ -1,0 +1,12 @@
+<div style="width:80%; margin:0 auto;">
+		<h1>Tipo Clientes</h1>
+	<% @tc.each do |type|  %>
+		<div class="listado caja">
+			<b><%= link_to type.name,type %></b>
+			<p class="lisp" ><%=type.description %></p>
+		</div><br>
+	<%end%>
+<div class='listado izquierdo'>
+	<%= link_to 'Crear Nuevo', new_type_client_path %>
+</div>
+</div>

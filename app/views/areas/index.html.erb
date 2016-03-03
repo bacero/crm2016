@@ -1,0 +1,18 @@
+<div style="width:80%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	            <h1>Areas</h1>
+	        </div>
+	    </div>
+	</div>
+<% @area.each do |a|  %>
+	<div class="listado caja">
+		<b><%= link_to a.name,a %></b>
+		
+	</div><br>
+<%end%>
+<div class=' listado izquierdo'>
+	<%= link_to 'Crear Nuevo', new_area_path %>
+</div>
+</div>

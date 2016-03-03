@@ -1,0 +1,96 @@
+<div style="width:60%; margin:0 auto;">
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h1> <%= @area.name %> </h1>
+	        </div>
+	    </div>
+	</div>
+	<div class="listado caja" style="width:100%; text-align: center;" >
+		<%= @area.description %>
+		<%= link_to "Editar",edit_area_path(@area),:class => "editar" %> 
+	</div>
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Grupo de Trabajo</h2>
+	        </div>
+	    </div>
+	</div>
+<div class="listado caja" style="width:100%; text-align: left;">
+	
+	<% 	gru = AreaGroup.where("area_id=#{@area.id}").select('name')
+		gru.each do |g| %>
+
+			<%= g.name %> <br>
+	<%end%>
+</div>
+
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Agregar Persona</h2>
+	        </div>
+	    </div>
+	</div>
+	<div>
+	<%= form_for(@group) do |g| %>
+	<% @group.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+		<%end%>
+		<div class="field">
+			<%= g.text_field:name, placeholder: "Nombre", class:"form-control"%>
+		</div>
+		<%= g.hidden_field:area_id, :value => @area.id %>
+				
+		<div class="field">
+			<%= g.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+ 
+ <div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>METAS</h2>
+	        </div>
+	    </div>
+	</div>
+<div class="listado caja" style="width:100%; text-align: left;">
+	
+	<% 	
+		@aims.each do |m| %>
+			<%= link_to m.name,m %> 
+			<br>
+	<%end%>
+</div>
+
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Agregar Meta</h2>
+	        </div>
+	    </div>
+	</div>
+	<div>
+	<%= form_for(@aim) do |a| %>
+	<% @aim.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+		<%end%>
+		<div class="field">
+			<%= a.text_field:name, placeholder: "Nombre de Meta", class:"form-control"%>
+		</div>
+		<div class="field">
+			<%= a.text_area:description, placeholder: "Description de Meta", class:"form-control"%>
+		</div>
+		<%= a.hidden_field:area_id, :value => @area.id %>
+				
+		<div class="field">
+			<%= a.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+
+
+</div>
+
