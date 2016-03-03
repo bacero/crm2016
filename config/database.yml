@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: crmU_production
-  username: crm
-  password: <%= ENV['CRM_DATABASE_PASSWORD'] %>
+  database: d15ls7f2fi7pkk
+  username: tsoqyqjckhfqeb
+  password: V-5NI8e6-qfcro4D0NXFhQpxIP %>
