@@ -1,33 +1,21 @@
-
-<div class="grid">
-	<div class="row space-top space-bot">
-			<h2 class="text-center">Atributos</h2>
-		</div>
-	<div class="row space-bot">
-		<div class="c12">
-			<% @p.each do |pro|  %>
-				<p class="note text-left" ><b style="margin-left:15px;"><%= pro.name %></b>
-					<br>
-				<span style="margin-left:15px; color:black;">
-				 <%=pro.description %><br>
-				 </span>
-				<span class="right" style="margin-top:-15px;margin-right:5px;"><%= link_to "Editar",edit_property_path(pro.id) %></span>	
-				</p>
-
-				
-			<%end%>
-		</div>
-
-	</div>
-	<div class="row space-bot">
-			<div class="c10 first"></div>
-			<div class="c2 last left"><p class="note text-center"><%= link_to 'Crear Nuevo Attributo ', new_property_path %></p></div>
-		</div>
+<div style="width:80%; margin:0 auto;">
+	<div class="row center-xs">
+    <div class="col-xs-6">
+        <div class="box">
+            <h1>Atributos</h1>
+        </div>
+    </div>
 </div>
-
-
-
-
+<% @p.each do |pro|  %>
+	<div class="listado caja">
+		<b><%= pro.name %></b>
+		<p class="lisp" ><%=pro.description %></p>
+		<%= link_to "Editar",edit_property_path(pro.id),:class => "editar" %>
+	</div><br>
+<%end%>
+	<div class="listado izquierdo">
+	    <%= link_to 'Crear Nuevo', new_property_path %>
+	</div>	
 
 
 	
