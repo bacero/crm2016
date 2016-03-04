@@ -1,15 +1,21 @@
 <div style="width:60%; margin:0 auto;">
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
+	
 	           <h1> <%= @client.name %> </h1>
-	        </div>
-	    </div>
-	</div>
+	  
 
 <div class="listado caja" style="width:100%; text-align: center;" >
-	Identidad <b> <%=@client.identity %> &nbsp;&nbsp;&nbsp;</b> Telefono <b> <%=@client.telephone %>&nbsp;&nbsp;&nbsp; </b> 
-	Direccion <b> <%=@client.address %> </b><br>
+	<table align="center" style="width:100%; text-align: center;" >
+		<tr>
+			<th>Identidad</th>
+			<th>Telefono</th>
+			<th>Direecion</th>
+		</tr>
+		<tr>
+			<td><%=@client.identity %></td>
+			<td><%=@client.telephone %></td>
+			<td><%=@client.address %></td>
+		</tr>
+	</table>
 	<%= link_to "Editar",edit_client_path(@client),:class => "editar" %> 
 </div>
 <div class="row center-xs">
@@ -21,44 +27,53 @@
 	</div>
 
 <div>
-<div class="listado caja" style="width:100%; text-align: left;">
-	<table>
-	<% @caa.each do |cat|  
+	<table align="center" style="width:100%; font-size:120%; ">
+	<% 
+		@t=1
+		@caa.each do |cat| 
+			if @t==1
+				%>
+				<tr>
+				<%
+			end
+			att = Property.where("id=#{cat.property_id}").select('name')
+			att.each do |a|
+				%><td> <b><%=  a.name %></b> <br> <%=cat.value %> </td>
+				<%
+			end
+			if @t==5
+				%>
+				</tr>
+				<%
+				@t=1
+			else
+				@t+=1
+			end
+		end 
 		
-		att = Property.where("id=#{cat.property_id}").select('name')
-		att.each do |a| %>
-
-			<tr><td><%= a.name %>:</td>
-		<%end%>
-
-			<td><b><%= cat.value %></b><br></td>
-		</tr>
-	<%end%>
+		%>
 	</table>
-</div>
-</div>
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Asignar Atributo</h2>
-	        </div>
-	    </div>
-	</div>
+	
 
-<div>
+</div>
+
+
+<div >
 	<%= form_for(@ca) do |f| %>
 	<% @ca.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
-		<div class="field">
+		<div class="field" >
+			Nuevo Atributo
 			<%= f.collection_select :property_id, Property.all, :id,:name, {prompt: 'Seleccione Atributo'}, class:"form-control" %>
 		</div>
 		<div class="field">
-			<%= f.text_field:value, placeholder: "Valor", class:"form-control"%>
+			Valor
+			<%= f.text_field:value, placeholder: "Ingrese Valor", class:"form-control"%>
 		</div>
 		<%= f.hidden_field:client_id, :value => @client.id %>
 				
-		<div class="field">
+		<div class="field" align='right'>
 			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 		</div>
 	<%end%>
@@ -79,7 +94,7 @@
 		<%= f.text_area:description, placeholder: "descripcion", class:"form-control"%>
 		</div>
 		<%= f.hidden_field:client_id, :value => @client.id %>
-		<div class="field">
+		<div class="field" align='right'	>
 			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 		</div>
 	<%end%>

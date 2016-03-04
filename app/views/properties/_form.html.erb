@@ -5,18 +5,21 @@
 		<div class="be-alert white">*<%= message %></div>
 	<%end%>
 	<div class="field">
-		<%= f.text_field:name, placeholder: "Atributo", class:"form-control"%>
+		Nombre<%= f.text_field:name, placeholder: "Ingresar valor para Nombre", class:"form-control"%>
 	</div>
 	<div class="field">
-		<%= f.text_area:description, placeholder: "description", class:"form-control"%>
+		Descripcion
+		<%= f.text_area:description, placeholder: "Ingresar Descripcion", class:"form-control"%>
 	</div>
 	<div class="field">
+		Tipo de Atributo
 		<%= f.collection_select :kind_property_id, KindProperty.all, :id,:name, {prompt: 'Seleccione Tipo'},class:"form-control" %>
 	</div>
 	<div class="field">
+		Estado
 		<%= f.collection_select :state_id, State.all, :id,:name, {prompt: 'Seleccione Estado'}, class:"form-control" %>
 	</div>
-	<div class="field">
+	<div class="field" align='right'>
 		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 	</div>
 

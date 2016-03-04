@@ -5,12 +5,14 @@
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
 		<div class="field">
-			<%= a.text_field:name, placeholder: "Nombre de Meta", class:"form-control"%>
+			Nombre
+			<%= a.text_field:name, placeholder: "Ingrese Nombre de Meta", class:"form-control"%>
 		</div>
 		<div class="field">
-			<%= a.text_area:description, placeholder: "Description de Meta", class:"form-control"%>
+			Descripcion
+			<%= a.text_area:description, placeholder: "Ingrese Description de Meta", class:"form-control"%>
 		</div>
-		<div class="field">
+		<div class="field" align='right'>
 			<%= a.submit "Guardar", class:"btn large-padding be-red" %>
 		</div>
 <%end%>

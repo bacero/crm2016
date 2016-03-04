@@ -5,24 +5,30 @@
 		<div class="be-alert white">*<%= message %></div>
 	<%end%>
 	<div class="field">
-		<%= f.text_field:name, placeholder: "Nombre", class:"form-control"%>
+		Nombre
+		<%= f.text_field:name, placeholder: "Ingrese Valor para Nombre", class:"form-control"%>
 	</div>
 	<div class="field">
-		<%= f.text_area:identity, placeholder: "Identidad", class:"form-control"%>
+		Identifiacion
+		<%= f.text_area:identity, placeholder: "Ingrese Identificacion", class:"form-control"%>
 	</div>
 	<div class="field">
-		<%= f.text_area:telephone, placeholder: "Telefono", class:"form-control"%>
+		Telefono
+		<%= f.text_area:telephone, placeholder: "Ingrese Numero Telefonico", class:"form-control"%>
 	</div>
 	<div class="field">
-		<%= f.text_area:address, placeholder: "Direccion", class:"form-control"%>
+		Direccion
+		<%= f.text_area:address, placeholder: "Ingrese Direccion", class:"form-control"%>
 	</div>
 	<div class="field">
+		Estado
 		<%= f.collection_select :state_id, State.all, :id,:name, {prompt: 'Seleccione Estado'}, class:"form-control" %>
 	</div>
 	<div class="field">
+		Tipo
 		<%= f.collection_select :type_client_id, TypeClient.all, :id,:name, {prompt: 'Seleccione Tipo'}, class:"form-control" %>
 	</div>
-	<div class="field">
+	<div class="field" align='right'>
 		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 	</div>
 

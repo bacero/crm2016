@@ -5,16 +5,19 @@
 		<div class="be-alert white">*<%= message %></div>
 	<%end%>
 	<div class="field">
-		<%= f.text_field:name, placeholder: "Nombre", class:"form-control"%>
+		Nombre
+		<%= f.text_field:name, placeholder: "Ingrese Valor para Nombre", class:"form-control"%>
 	</div>
 	
 	<div class="field">
-		<%= f.text_area:description, placeholder: "Descripcion", class:"form-control"%>
+		Descripcion
+		<%= f.text_area:description, placeholder: "Ingrese Descripcion", class:"form-control"%>
 	</div>
 	<div class="field">
-		<%= f.text_field:creator, placeholder: "Creador", class:"form-control"%>
+		Creador
+		<%= f.text_field:creator, placeholder: "Ingrese Nombre de Creador", class:"form-control"%>
 	</div>
-	<div class="field">
+	<div class="field" align='right'>
 		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 	</div>
 
