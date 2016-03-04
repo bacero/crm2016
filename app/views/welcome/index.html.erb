@@ -1,3 +1,17 @@
+<div style="width:80%; margin:0 auto;">
 <h1>Hi User</h1>
-<p>CRM</p>
-prueba para mi heroku
+<p>
+	Tareas Asignadas
+	<% @labors.each do |l|  %>
+	<% a=LaborShift.where("labor_id=#{l.id}").sum(:advance) %>
+	<div class="listado caja">
+		<b><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></b>
+		<p class="lisp" ><%=l.description %></p>
+		<p class="lisp"> <b>Indicador</b><br><%=l.indicator_description%> : <b><%= a %></b>/<%= l.indicator %></p>
+		<p class="lisp" ><b>Fechas</b><br>
+			Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
+		<%= link_to "Ver Tarea Completa",labor_path(l.id),:class => "editar" %>
+	</div><br>
+<%end%>
+</P>
+</div>

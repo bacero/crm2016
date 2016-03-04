@@ -21,38 +21,15 @@
 			</tr>
 		</table>
 	</div>
+	<br>
 <div>
 	<% @observations.each do |o|  %>		
 	<div class="listado caja">
-		<%=o.description %><br>
+		<%=o.description %>
+		<p class="lisp" align="right"><%= o.created_at.strftime("%y-%m-%d ") %></p>
 	</div><br>
 <%end%>
 </div>
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	           <h2> Historial de Cambios </h2>
-	        </div>
-	    </div>
-	</div>
-<div class="listado caja">
-	<% @changes.each do |c|  %>
-		<p style="font-size:65%; text-align:center">
-			<b><%=c.created_at.strftime("%m-%d-%Y")%></b>: El atributo <b><%= c.property %></b> con valor:<b> <%=c.previus %></b> se cambio por <b><%=c.mint %></b></p>
-	<%end%>
-</div>
-	<br>
-
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Observaciones</h2>
-
-	        </div>
-	    </div>
-	</div>
-
-<div>
 <p>esto solo lo creara el usuario registrado</p>
 <div>
 	<%= form_for(@comment) do |f| %>
@@ -68,6 +45,32 @@
 		</div>
 	<%end%>
 </div>
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h2> Historial de Cambios </h2>
+	        </div>
+	    </div>
+	</div>
+<div class="listado caja">
+	<% @changes.each do |c|  %>
+		<p style="font-size:55%; ">
+			<b><%=c.created_at.strftime("%m-%d-%Y")%></b>: El atributo <b><%= c.property %></b> con valor:<b> <%=c.previus %></b> se cambio por <b><%=c.mint %></b></p>
+	<%end%>
+</div>
+	<br>
+
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>Observaciones</h2>
+
+	        </div>
+	    </div>
+	</div>
+
+<div>
+
 
 
 <div class="row center-xs">
@@ -98,6 +101,7 @@
 	<% @comnents.each do |o|  %>		
 	<div class="listado caja">
 		<%=o.description %><br>
+		<p class="lisp" align="right"><%= o.created_at.strftime("%y-%m-%d ")  %></p>
 	</div><br>
 <%end%>
 </div>

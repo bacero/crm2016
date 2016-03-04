@@ -1,0 +1,21 @@
+<div style="width:60%; margin:0 auto;">
+
+<h1><%= @name %></h1>
+<%= form_for(@shift) do |s| %>
+	<% @shift.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+	<%end%>
+	<div class="field">
+		Descripcion
+		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
+	</div>
+	<div class="field">
+		Avance del Indicador
+		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
+	</div>
+	<%= s.hidden_field:labor_id, :value =>@labor %>
+	<div class="field" align='right'>
+		<%= s.submit "Guardar", class:"btn large-padding be-red" %>
+	</div>
+<%end%>
+</div>

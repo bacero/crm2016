@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :labors
   resources :labor_changes
   resources :labor_comments
+  resources :labor_shifts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
