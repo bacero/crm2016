@@ -1,12 +1,74 @@
-<div style="width:80%; margin:0 auto;">
-	<div class="listado">
-		<b><%= @p.name %></b>
-		<div class='izquierdo'>
-			<%= link_to "Editar",edit_project_path(@p) %>
-    		
+<div style="width:60%; margin:0 auto;">
+<h1> <%= @p.name %> </h1>
+
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>TAREAS</h2>
+	        </div>
+	    </div>
+	</div>
+<% @labors.each do |l|  %>
+	<div class="listado caja">
+		<b> <%= link_to l.name,l %> </b>
+		<p class="lisp" ><%=l.description %></p>
+		<p class="lisp" >Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
+		<%= link_to "Editar",edit_labor_path(l.id),:class => "editar" %>
+	</div><br>
+<%end%>
+
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>CREAR TAREA</h2>
+	        </div>
+	    </div>
+	</div>
+<div>
+	<%= form_for(@labor) do |l| %>
+	<% @labor.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+		<%end%>
+		<div class="field">
+			Nombre
+			<%= l.text_field:name, placeholder: "Ingrese Valor para Nombre", class:"form-control"%>
 		</div>
-	</div>	
-</div>	
+		<div class="field">
+			Descripcion
+			<%= l.text_area:description, placeholder: "Description Tarea", class:"form-control"%>
+		</div>
+		<div class="field">
+			Titulo de Indicador
+			<%= l.text_field:indicator_description, placeholder: "Descripcion de Indicador", class:"form-control"%>
+		</div>
+		<div class="field">
+			Valor de Indicador
+			<%= l.text_field:indicator, placeholder: "Cantidad de Indicador", class:"form-control"%>
+		</div>
+		<div class="field">
+			Fecha Inicio
+			<script type="text/javascript">$(function() {
+			  $('#labor_initiation').datepicker({dateFormat: 'yy-mm-dd'});
+			  $('#labor_ending').datepicker({dateFormat: 'yy-mm-dd'});
+			});
+			</script>
+			<%= l.text_field:initiation, placeholder: "Seleccione Fecha de Inicio", class:"form-control"%>
+		</div>
+		<div class="field">
+			Fecha Finalizacion
+			<%= l.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
+		</div>
+				
+		<%= l.hidden_field:project_id, :value => @p.id %>
+				
+		<div class="field" align='right'>
+			<%= l.submit "Guardar", class:"btn large-padding be-red" %>
+		</div>
+	<%end%>
+</div>
+ 
+
+</div>
 
 
 

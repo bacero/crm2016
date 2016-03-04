@@ -2,7 +2,7 @@
  <h1>Proyectos</h1>
 <% @p.each do |pro|  %>
 	<div class="listado caja">
-		<b><%= pro.name %></b>
+		<b><%= link_to pro.name,pro %></b>
 		<p class="lisp" ><%=pro.description %></p>
 		<%= link_to "Editar",edit_project_path(pro.id),:class => "editar" %>
 	</div><br>

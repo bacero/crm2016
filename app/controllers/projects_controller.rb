@@ -7,6 +7,8 @@ class ProjectsController < ApplicationController
 	end
 	def show
 		@p = Project.find(params[:id])
+		@labors = Labor.where('project_id='+params[:id])
+		@labor = Labor.new()
 	end
 	def edit
 		@p = Project.find(params[:id])
