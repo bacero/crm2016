@@ -1,10 +1,7 @@
 <div style="width:60%; margin:0 auto;">
 	<h1> <%= @area.name %> </h1>
 	    
-	<div class="listado caja" style="width:100%; text-align: center;" >
-		<%= @area.description %>
-		<%= link_to "Editar",edit_area_path(@area),:class => "editar" %> 
-	</div>
+	
 <div class="row center-xs">
 	    <div class="col-xs-6">
 	        <div class="box">
@@ -45,14 +42,18 @@
 	        </div>
 	    </div>
 	</div>
-<div class="listado caja" style="width:100%; text-align: left;">
+
 	
 	<% 	
 		@aims.each do |m| %>
-			<%= link_to m.name,m %> 
-			<br>
+		<div class="listado caja" style="width:100%; text-align: left;">
+			<%= link_to m.name,m %>
+			<p class="lisp" ><%=m.description %></p>
+			<%= link_to "Editar",edit_area_aim_path(m),:class => "editar" %> 
+		</div>
+		<br>
 	<%end%>
-</div>
+
 
 <div class="row center-xs">
 	    <div class="col-xs-6">

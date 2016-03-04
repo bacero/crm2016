@@ -35,27 +35,13 @@
 	        </div>
 	    </div>
 	</div>
-
+<div class="listado caja">
 	<% @changes.each do |c|  %>
-	<div class="listado caja">
-		<table>
-			<tr>
-				<th>Campo</th>
-				<th>Dato Viejo</th>
-				<th>Dato Nuevo</th>
-				<th>Fecha</th>
-			</tr>
-			<tr>
-				<td><%= c.property %></td>
-				<td><%=c.previus %></td>
-				<td><%=c.mint %></td>
-				<td><%=c.created_at.strftime("%m-%d-%Y")  %></td>
-			</tr>
-		</table>
-			
-	</div>
-	<br>
+		<p style="font-size:65%; text-align:center">
+			<b><%=c.created_at.strftime("%m-%d-%Y")%></b>: El atributo <b><%= c.property %></b> con valor:<b> <%=c.previus %></b> se cambio por <b><%=c.mint %></b></p>
 	<%end%>
+</div>
+	<br>
 
 	<div class="row center-xs">
 	    <div class="col-xs-6">
