@@ -20,7 +20,7 @@
 
 <div>
 	<%= form_for(@group) do |g| %>
-	<% @group.errors.full_messages.each do |message|%>
+		<% @group.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
 		<div class="field">

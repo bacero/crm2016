@@ -12,7 +12,15 @@
 	<div class="listado caja">
 		<b> <%= link_to l.name,l %> </b>
 		<p class="lisp" ><%=l.description %></p>
-		<p class="lisp" >Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
+
+		<% if l.initiation && l.ending %>
+			<p class="lisp" >Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
+		<% 
+			else
+				%>
+				<p class="lisp" ><b>Tarea Recurrente</b></p>
+		  <% end %>
+		 </p>
 		<%= link_to "Editar",edit_labor_path(l.id),:class => "editar" %>
 	</div><br>
 <%end%>
@@ -43,7 +51,7 @@
 		</div>
 		<div class="field">
 			Valor de Indicador
-			<%= l.text_field:indicator, placeholder: "Cantidad de Indicador", class:"form-control"%>
+			<%= l.number_field:indicator,min:1, placeholder: "Cantidad de Indicador", :class => 'text_field', :step => 'any',class:"form-control" %>
 		</div>
 		<div class="field">
 			Fecha Inicio

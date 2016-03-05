@@ -1,7 +1,7 @@
 <div style="width:60%; margin:0 auto;">
 	
 	           <h1> <%= @labor.name %> </h1>
-	        
+	<% a=LaborShift.where("labor_id=#{@labor.id}").sum(:advance) %>  
 	<div>
 		<table align="center" style="font-size:150%;" >
 			<tr>
@@ -11,7 +11,7 @@
 				<td><b>Descripcion Indicador</b></td><td><%= @labor.indicator_description %></td>
 			</tr>
 			<tr>
-				<td><b>Indicador</b></td><td><%= @labor.indicator %></td>
+				<td><b>Indicador</b></td><td><%= a %>/<%= @labor.indicator %></td>
 			</tr>
 			<tr>
 				<td><b>Inicio</b></td><td><%= @labor.initiation %></td>

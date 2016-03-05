@@ -5,7 +5,10 @@ class AreaAimsController < ApplicationController
 		if @aim.save
 			redirect_to @aim
 		else
-			render :new
+			a=params[:area_aim]
+			a=a[:area_id]
+			@a = Area.find(a)
+			redirect_to @a
 		end
 	end
 	def show

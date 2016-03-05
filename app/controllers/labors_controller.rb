@@ -4,7 +4,10 @@ class LaborsController < ApplicationController
 		if @labor.save
 			redirect_to @labor
 		else
-			render :new
+			p=params[:labor]
+			p=p[:area_aim_id]
+			@a = AreaAim.find(p)
+			redirect_to @a
 		end
 	end
 	def edit

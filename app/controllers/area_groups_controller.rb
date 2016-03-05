@@ -8,7 +8,7 @@ class AreaGroupsController < ApplicationController
 		if @grupo.save
 			redirect_to @a
 		else
-			render :new
+			redirect_to @a
 		end
 	end
 	def group_params
