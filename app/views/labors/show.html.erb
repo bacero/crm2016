@@ -22,29 +22,7 @@
 		</table>
 	</div>
 	<br>
-<div>
-	<% @observations.each do |o|  %>		
-	<div class="listado caja">
-		<%=o.description %>
-		<p class="lisp" align="right"><%= o.created_at.strftime("%y-%m-%d ") %></p>
-	</div><br>
-<%end%>
-</div>
-<p>esto solo lo creara el usuario registrado</p>
-<div>
-	<%= form_for(@comment) do |f| %>
 
-		<div class="field">
-		Crear Nueva Observacion
-		<%= f.text_area:description, placeholder: "Ingrese Observacion", class:"form-control"%>
-		</div>
-		<%= f.hidden_field:labor_id, :value => @labor.id %>
-		<%= f.hidden_field:kind, :value => "1" %>
-		<div class="field" align='right'>
-			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
-		</div>
-	<%end%>
-</div>
 	<div class="row center-xs">
 	    <div class="col-xs-6">
 	        <div class="box">
@@ -59,17 +37,6 @@
 	<%end%>
 </div>
 	<br>
-
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Observaciones</h2>
-
-	        </div>
-	    </div>
-	</div>
-
-<div>
 
 
 
