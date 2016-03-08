@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304204241) do
+ActiveRecord::Schema.define(version: 20160308030716) do
 
   create_table "area_aims", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 20160304204241) do
     t.integer  "state_id",    limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.date     "initiation"
+    t.date     "ending"
+    t.integer  "indicator",   limit: 4
   end
 
   add_index "area_aims", ["area_id"], name: "index_area_aims_on_area_id", using: :btree
@@ -148,6 +151,9 @@ ActiveRecord::Schema.define(version: 20160304204241) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.date     "initiation"
+    t.date     "ending"
+    t.integer  "indicator",   limit: 4
   end
 
   create_table "properties", force: :cascade do |t|

@@ -30,6 +30,6 @@ class AreaAimsController < ApplicationController
 	end
 	private
 	def aim_params
-		params.require(:area_aim).permit(:name,:description,:area_id)
+		params.require(:area_aim).permit(:name,:description,:area_id,:indicator,:initiation,:ending)
 	end
 end

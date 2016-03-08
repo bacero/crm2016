@@ -4,6 +4,13 @@
 	<div class="listado caja">
 		<b><%= link_to pro.name,pro %></b>
 		<p class="lisp" ><%=pro.description %></p>
+		<% if pro.initiation && pro.ending %>
+			<p class="lisp" >Inicio: <%=pro.initiation.strftime("%m-%d-%Y")  %> Fin: <%=pro.ending.strftime("%m-%d-%Y")  %> </p>
+		<% 
+			else
+				%>
+				<p class="lisp" ><b>Proyecto Recurrente</b></p>
+		  <% end %>
 		<%= link_to "Editar",edit_project_path(pro.id),:class => "editar" %>
 	</div><br>
 <%end%>

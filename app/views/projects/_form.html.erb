@@ -11,8 +11,26 @@
 		<%= f.text_area:description, placeholder: "Description Proyecto", class:"form-control"%>
 	</div>
 	<div class="field">
+			Indicador
+			<%= f.number_field:indicator,min:1, placeholder: "Cantidad de Indicador", :class => 'text_field', :step => 'any',class:"form-control" %>
+		</div>
+		<div class="field">
+			Fecha Inicio
+			<script type="text/javascript">$(function() {
+			  $('#project_initiation').datepicker({dateFormat: 'yy-mm-dd'});
+			  $('#project_ending').datepicker({dateFormat: 'yy-mm-dd'});
+			});
+			</script>
+			<%= f.text_field:initiation, placeholder: "Seleccione Fecha de Inicio", class:"form-control"%>
+		</div>
+		<div class="field">
+			Fecha Finalizacion
+			<%= f.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
+		</div>
+	<div class="field">
 		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
 	</div>
+
 
 <%end%>
 </div>

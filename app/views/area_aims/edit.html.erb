@@ -12,6 +12,23 @@
 			Descripcion
 			<%= a.text_area:description, placeholder: "Ingrese Description de Meta", class:"form-control"%>
 		</div>
+		<div class="field">
+			Indicador
+			<%= a.number_field:indicator,min:1, placeholder: "Cantidad de Indicador", :class => 'text_field', :step => 'any',class:"form-control" %>
+		</div>
+		<div class="field">
+			Fecha Inicio
+			<script type="text/javascript">$(function() {
+			  $('#area_aim_initiation').datepicker({dateFormat: 'yy-mm-dd'});
+			  $('#area_aim_ending').datepicker({dateFormat: 'yy-mm-dd'});
+			});
+			</script>
+			<%= a.text_field:initiation, placeholder: "Seleccione Fecha de Inicio", class:"form-control"%>
+		</div>
+		<div class="field">
+			Fecha Finalizacion
+			<%= a.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
+		</div>
 		<div class="field" align='right'>
 			<%= a.submit "Guardar", class:"btn large-padding be-red" %>
 		</div>
