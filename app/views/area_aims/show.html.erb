@@ -11,44 +11,32 @@
 	        </div>
 	    </div>
 	</div>
-<table>
-	<tr>
-		<th>Nombre</th>
-		<th style="width:40%;">Descripcion</th>
-		<th>Inicio</th>
-		<th>Fin</th>
-		<th>Indicador</th>
-		<th>Estado</th>
-	</tr>
-
 <% @labors.each do |l|  %>
-	
-		<tr>
-			<td><%= link_to l.name,l %></td>
-			<td><%=l.description %></td>
+	<div class="listado caja">
+		<b> <%= link_to l.name,l %> </b>
+		<p class="lisp" ><%=l.description %></p>
 		<% if l.initiation && l.ending %>
-			<td><%=l.initiation.strftime("%m-%d-%Y")  %></td><td> <%=l.ending.strftime("%m-%d-%Y")  %> </td>
+			<p class="lisp" >Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
 		<% 
 			else
 				%>
-				<td></td><td></td>
+				<p class="lisp" ><b>Tarea Recurrente</b></p>
 		  <% end %>
-		<td></td><td></td>	
-		<td><%= link_to "Editar",edit_labor_path(l.id) %></td>
+		
+		
+		<%= link_to "Editar",edit_labor_path(l.id),:class => "editar" %>
+	</div><br>
 <%end%>
-</table>
-<br>
 
- 
-
-
-
-<div class="field" align='right'>
-<button id="abrir">Crear Tarea</button>
-</div>
-
-<div id="dialog" title="Crear Nueva Tarea">
-<%= form_for(@labor) do |l| %>
+<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	          <h2>CREAR TAREA</h2>
+	        </div>
+	    </div>
+	</div>
+<div>
+	<%= form_for(@labor) do |l| %>
 	<% @labor.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
@@ -93,4 +81,6 @@
 		</div>
 	<%end%>
 </div>
+ 
+
 </div>
