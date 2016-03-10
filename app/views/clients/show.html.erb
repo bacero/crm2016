@@ -1,6 +1,5 @@
 <div style="width:60%; margin:0 auto;">
-	
-	           <h1> <%= @client.name %> </h1>
+ <h1> <%= @client.name %> </h1>
 	  
 
 <div class="listado caja" style="width:100%; text-align: center;" >
@@ -18,13 +17,8 @@
 	</table>
 	<%= link_to "Editar",edit_client_path(@client),:class => "editar" %> 
 </div>
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Atributos Asignados</h2>
-	        </div>
-	    </div>
-	</div>
+
+<h2>ATRIBUTOS ASIGNADOS</h2>
 
 <div>
 	<table align="center" style="width:100%; font-size:120%; ">
@@ -78,13 +72,8 @@
 		</div>
 	<%end%>
 </div>
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Actividades</h2>
-	        </div>
-	    </div>
-	</div>
+<h2>ACTIVIDADES</h2>
+    
 
 <div>
 

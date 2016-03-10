@@ -32,28 +32,29 @@
 		</table>
 	</div>
 	<br>
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	           <h2> Historial de Avances </h2>
-	        </div>
-	    </div>
-	</div>
-	<div class="listado caja">
+<h2> HISTORIAL DE AVANCES </h2>
+	<div class="listadodos caja">
+	<table style="font-size:55%; width:100%">
+		<tr>
+			<th>Avance</th>
+			<th>Observaciones</th>
+			<th>Usuario</th>
+			<th>fecha</th>
+		</tr>
 	<% e.each do |ava|  %>
-		<p style="font-size:55%; ">
-			<b><%=ava.created_at.strftime("%m-%d-%Y")%></b>: <b><%= ava.advance %></b> <%=ava.description%></p>
+		<tr>
+			<td><%= ava.advance %></td>
+			<td><%=ava.description%></td>
+			<td></td>
+			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
+			 
+		</tr>
 	<%end%>
+	</table>  
 </div>
 	<br>
+<h2> HISTORIAL DE CAMBIOS </h2>
 
-	<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	           <h2> Historial de Cambios </h2>
-	        </div>
-	    </div>
-	</div>
 <div class="listado caja">
 	<% @changes.each do |c|  %>
 		<p style="font-size:55%; ">
@@ -64,14 +65,8 @@
 
 
 
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Comentarios</h2>
+<h2>COMENTARIOS</h2>
 
-	        </div>
-	    </div>
-	</div>
 
 <div>
 <div>

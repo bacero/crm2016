@@ -31,12 +31,24 @@
 <%= link_to "Agregar Avance",new_labor_shift_path(:area_aim_id => @aim.id,:name => @aim.name),class:"btn large-padding be-red"%>
 </div>
 <h2> HISTORIAL DE AVANCES </h2>
-	      
 	<div class="listadodos caja">
+	<table style="font-size:55%; width:100%">
+		<tr>
+			<th>Avance</th>
+			<th>Observaciones</th>
+			<th>Usuario</th>
+			<th>fecha</th>
+		</tr>
 	<% e.each do |ava|  %>
-		<p style="font-size:55%; ">
-			<%=ava.created_at.strftime("%m-%d-%Y")%> : <b><%= ava.advance %></b> <%=ava.description%></p>
+		<tr>
+			<td><%= ava.advance %></td>
+			<td><%=ava.description%></td>
+			<td></td>
+			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
+			 
+		</tr>
 	<%end%>
+	</table>  
 </div>
 
 <h2>TAREAS</h2>

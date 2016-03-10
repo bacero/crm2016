@@ -1,14 +1,8 @@
 <div style="width:60%; margin:0 auto;">
 	<h1> <%= @area.name %> </h1>
 	    
-	
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Grupo de Trabajo</h2>
-	        </div>
-	    </div>
-	</div>
+<h2>GRUPO DE TRABAJO</h2>
+	       
 <div class="listado caja" style="width:100%; text-align: left;">
 	
 	<% 	gru = AreaGroup.where("area_id=#{@area.id}").select('name')
@@ -34,17 +28,8 @@
 		</div>
 	<%end%>
 </div>
- 
- <div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>METAS</h2>
-	        </div>
-	    </div>
-	</div>
-
-	
-	<% 	
+<h2>METAS</h2>
+<% 	
 		@aims.each do |m| %>
 		<div class="listado caja" style="width:100%; text-align: left;">
 			<%= link_to m.name,m %>
