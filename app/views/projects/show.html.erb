@@ -1,39 +1,97 @@
 <div style="width:60%; margin:0 auto;">
 <h1> <%= @p.name %> </h1>
-
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>TAREAS</h2>
-	        </div>
-	    </div>
+<div>
+	<% a=LaborShift.where("project_id=#{@p.id}").last 
+		e=LaborShift.where("project_id=#{@p.id}")
+	 
+	%>  
+		<table align="center" style="font-size:150%;" >
+			<tr>
+				<td><b>Descripcion</b></td><td><%= @p.description %></td>
+			</tr>
+			<tr>
+				<td><b>Indicador</b></td><td><%= 
+				if a
+					a.advance 
+				else
+					0
+				end
+				
+				%>/<%= @p.indicator %></td>
+			</tr>
+			<tr>
+				<td><b>Inicio</b></td><td><%= @p.initiation %></td>
+			</tr>
+			<tr>
+				<td><b>Fin</b></td><td><%= @p.ending  %></td>
+			</tr>
+		</table>
 	</div>
-<% @labors.each do |l|  %>
-	<div class="listado caja">
-		<b> <%= link_to l.name,l %> </b>
-		<p class="lisp" ><%=l.description %></p>
+<div class="field" align='right'>
+<%= link_to "Agregar Avance",new_labor_shift_path(:project_id => @p.id,:name => @p.name),class:"btn large-padding be-red"%>
+</div>
 
+<h2> HISTORIAL DE AVANCES </h2>
+	      
+	<div class="listadodos caja">
+	<% e.each do |ava|  %>
+		<p style="font-size:55%; ">
+			<%=ava.created_at.strftime("%m-%d-%Y")%> : <b><%= ava.advance %></b> <%=ava.description%></p>
+	<%end%>
+</div>
+<h2>TAREAS</h2>
+
+
+
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th style="width:40%;">Descripcion</th>
+		<th>Inicio</th>
+		<th>Fin</th>
+		<th>Indicador</th>
+		<th>Estado</th>
+	</tr>
+
+<% @labors.each do |l|  %>
+	
+		<tr>
+			<td><%= link_to l.name,l %></td>
+			<td><%=l.description %></td>
 		<% if l.initiation && l.ending %>
-			<p class="lisp" >Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
+			<td><%=l.initiation.strftime("%m-%d-%Y")  %></td><td> <%=l.ending.strftime("%m-%d-%Y")  %> </td>
 		<% 
 			else
 				%>
-				<p class="lisp" ><b>Tarea Recurrente</b></p>
+				<td></td><td></td>
 		  <% end %>
-		 </p>
-		<%= link_to "Editar",edit_labor_path(l.id),:class => "editar" %>
-	</div><br>
+		<td></td><td></td>	
+		<td><%= link_to "Editar",edit_labor_path(l.id) %></td>
 <%end%>
+</table>
+<br>
 
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>CREAR TAREA</h2>
-	        </div>
-	    </div>
-	</div>
-<div>
-	<%= form_for(@labor) do |l| %>
+
+ <script>
+$(function () {
+$("#dialog").dialog({
+autoOpen: false,
+modal: true
+});
+$("#abrir")
+.button()
+.click(function () {
+$("#dialog").dialog("option", "width", 400);
+$("#dialog").dialog("open");
+});
+});
+</script>
+<div class="field" align='right'>
+<button id="abrir">Crear Tarea</button>
+</div>
+
+<div id="dialog" title="Crear Nueva Tarea">
+<%= form_for(@labor) do |l| %>
 	<% @labor.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
@@ -66,7 +124,7 @@
 			Fecha Finalizacion
 			<%= l.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
 		</div>
-				
+			
 		<%= l.hidden_field:project_id, :value => @p.id %>
 				
 		<div class="field" align='right'>
@@ -74,7 +132,6 @@
 		</div>
 	<%end%>
 </div>
- 
 
 </div>
 

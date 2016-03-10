@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308030716) do
+ActiveRecord::Schema.define(version: 20160310030938) do
 
   create_table "area_aims", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -112,9 +112,13 @@ ActiveRecord::Schema.define(version: 20160308030716) do
     t.integer  "labor_id",    limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "project_id",  limit: 4
+    t.integer  "area_aim_id", limit: 4
   end
 
+  add_index "labor_shifts", ["area_aim_id"], name: "index_labor_shifts_on_area_aim_id", using: :btree
   add_index "labor_shifts", ["labor_id"], name: "index_labor_shifts_on_labor_id", using: :btree
+  add_index "labor_shifts", ["project_id"], name: "index_labor_shifts_on_project_id", using: :btree
 
   create_table "labors", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -194,7 +198,9 @@ ActiveRecord::Schema.define(version: 20160308030716) do
   add_foreign_key "clients", "type_clients"
   add_foreign_key "labor_changes", "labors"
   add_foreign_key "labor_comments", "labors"
+  add_foreign_key "labor_shifts", "area_aims"
   add_foreign_key "labor_shifts", "labors"
+  add_foreign_key "labor_shifts", "projects"
   add_foreign_key "labors", "area_aims"
   add_foreign_key "labors", "clients"
   add_foreign_key "labors", "projects"

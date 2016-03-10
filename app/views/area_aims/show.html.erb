@@ -1,16 +1,46 @@
 <div style="width:60%; margin:0 auto;">
-	
-	           <h1> <%= @aim.name %> </h1>
-	
-	
-
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>TAREAS</h2>
-	        </div>
-	    </div>
+<h1> <%= @aim.name %> </h1>
+<div>
+	<% a=LaborShift.where("area_aim_id=#{@aim.id}").last 
+		e=LaborShift.where("area_aim_id=#{@aim.id}")
+	 
+	%>  
+		<table align="center" style="font-size:150%;" >
+			<tr>
+				<td><b>Descripcion</b></td><td><%= @aim.description %></td>
+			</tr>
+			<tr>
+				<td><b>Indicador</b></td><td><%= 
+				if a
+					a.advance 
+				else
+					0
+				end
+				
+				%>/<%= @aim.indicator %></td>
+			</tr>
+			<tr>
+				<td><b>Inicio</b></td><td><%= @aim.initiation %></td>
+			</tr>
+			<tr>
+				<td><b>Fin</b></td><td><%= @aim.ending  %></td>
+			</tr>
+		</table>
 	</div>
+<div class="field" align='right'>
+<%= link_to "Agregar Avance",new_labor_shift_path(:area_aim_id => @aim.id,:name => @aim.name),class:"btn large-padding be-red"%>
+</div>
+<h2> HISTORIAL DE AVANCES </h2>
+	      
+	<div class="listadodos caja">
+	<% e.each do |ava|  %>
+		<p style="font-size:55%; ">
+			<%=ava.created_at.strftime("%m-%d-%Y")%> : <b><%= ava.advance %></b> <%=ava.description%></p>
+	<%end%>
+</div>
+
+<h2>TAREAS</h2>
+	        
 <table>
 	<tr>
 		<th>Nombre</th>

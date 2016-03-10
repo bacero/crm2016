@@ -1,7 +1,10 @@
 <div style="width:60%; margin:0 auto;">
 	
 	           <h1> <%= @labor.name %> </h1>
-	<% a=LaborShift.where("labor_id=#{@labor.id}").sum(:advance) %>  
+	<% a=LaborShift.where("labor_id=#{@labor.id}").last 
+		e=LaborShift.where("labor_id=#{@labor.id}")
+	 
+	%>  
 	<div>
 		<table align="center" style="font-size:150%;" >
 			<tr>
@@ -11,7 +14,14 @@
 				<td><b>Descripcion Indicador</b></td><td><%= @labor.indicator_description %></td>
 			</tr>
 			<tr>
-				<td><b>Indicador</b></td><td><%= a %>/<%= @labor.indicator %></td>
+				<td><b>Indicador</b></td><td><%= 
+				if a
+					a.advance 
+				else
+					0
+				end
+				
+				%>/<%= @labor.indicator %></td>
 			</tr>
 			<tr>
 				<td><b>Inicio</b></td><td><%= @labor.initiation %></td>
@@ -21,6 +31,20 @@
 			</tr>
 		</table>
 	</div>
+	<br>
+	<div class="row center-xs">
+	    <div class="col-xs-6">
+	        <div class="box">
+	           <h2> Historial de Avances </h2>
+	        </div>
+	    </div>
+	</div>
+	<div class="listado caja">
+	<% e.each do |ava|  %>
+		<p style="font-size:55%; ">
+			<b><%=ava.created_at.strftime("%m-%d-%Y")%></b>: <b><%= ava.advance %></b> <%=ava.description%></p>
+	<%end%>
+</div>
 	<br>
 
 	<div class="row center-xs">

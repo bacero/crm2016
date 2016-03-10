@@ -13,7 +13,15 @@
 		Avance del Indicador
 		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
 	</div>
-	<%= s.hidden_field:labor_id, :value =>@labor %>
+	<%
+		if @labor%>
+			<%= s.hidden_field:labor_id, :value =>@labor %>
+	 <% elsif @project %>
+			<%= s.hidden_field:project_id, :value =>@project %>
+	 <% else @aim %>
+			<%= s.hidden_field:area_aim_id, :value =>@aim %>
+	  <%end%>
+	
 	<div class="field" align='right'>
 		<%= s.submit "Guardar", class:"btn large-padding be-red" %>
 	</div>

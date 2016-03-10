@@ -3,11 +3,20 @@
 <p>
 	Tareas Asignadas
 	<% @labors.each do |l|  %>
-	<% a=LaborShift.where("labor_id=#{l.id}").sum(:advance) %>
+	<% a=LaborShift.where("labor_id=#{l.id}").last
+	  
+	 %>
 	<div class="listado caja">
 		<b><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></b>
 		<p class="lisp" ><%=l.description %></p>
-		<p class="lisp"> <b>Indicador</b><br><%=l.indicator_description%> : <b><%= a %></b>/<%= l.indicator %></p>
+		<p class="lisp"> <b>Indicador</b><br><%=l.indicator_description%> : <b>
+			<%= if a
+					a.advance
+				else
+					0
+				end
+			 %>
+		</b>/<%= l.indicator %></p>
 		<% if l.initiation && l.ending %>
 			<p class="lisp" ><b>Fechas</b><br>
 					Inicio: <%=l.initiation.strftime("%m-%d-%Y")  %> Fin: <%=l.ending.strftime("%m-%d-%Y")  %> </p>
@@ -17,7 +26,10 @@
 				<p class="lisp" ><b>Tarea Recurrente</b></p>
 		  <% end %>
 		<%= link_to "Ver Tarea Completa",labor_path(l.id),:class => "editar" %>
-	</div><br>
-<%end%>
+	</div>
+	<br>
+	<%end%>
 </P>
 </div>
+
+

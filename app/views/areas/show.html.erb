@@ -62,15 +62,26 @@
 	<%end%>
 
 
-<div class="row center-xs">
-	    <div class="col-xs-6">
-	        <div class="box">
-	          <h2>Agregar Meta</h2>
-	        </div>
-	    </div>
-	</div>
-	<div>
-	<%= form_for(@aim) do |a| %>
+<script>
+$(function () {
+$("#dialog").dialog({
+autoOpen: false,
+modal: true
+});
+$("#abrir")
+.button()
+.click(function () {
+$("#dialog").dialog("option", "width", 400);
+$("#dialog").dialog("open");
+});
+});
+</script>
+<div class="field" align='right'>
+<button id="abrir">Agregar Meta</button>
+</div>
+
+<div id="dialog" title="Crear Nueva Meta">
+<%= form_for(@aim) do |a| %>
 	<% @aim.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 		<%end%>
@@ -106,7 +117,5 @@
 		</div>
 	<%end%>
 </div>
-
-
 </div>
 
