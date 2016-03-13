@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+
+  devise_for :users,controllers:{registrations:'registrations',sessions:'sessions'}
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
+  # root 'welcome#index'
+
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
+
+ devise_scope :user do
+    authenticated  do
+       
   resources :states, only: [:index]
   resources :kind_properties, only: [:index]
   resources :properties
@@ -15,17 +31,12 @@ Rails.application.routes.draw do
   resources :labor_changes
   resources :labor_comments
   resources :labor_shifts
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  root 'welcome#index'
+      root to: 'welcome#index'
+    end
+    unauthenticated do
+      root to: 'devise/sessions#new', as: 'unauthenticated_root'
+    end
+  end  
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
