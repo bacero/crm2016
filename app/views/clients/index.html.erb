@@ -1,10 +1,14 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Clientes</h1>
-	
+<table align="center" style="width:80%;font-size:150%;">
+	<tr>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Resumen</th>
+	</tr>
 <% @client.each do |cli|  %>
-	<div class="listado caja">
-		<b><%= link_to cli.name,cli %></b>
-		<br> 
+		<tr>
+		<td><b><%= link_to cli.name,cli %></b></td>
 		<% 
 		  idd=cli.type_client_id
 		   type=TypeClient.where("id=#{idd}").select('name')
@@ -12,18 +16,19 @@
 		   input=input.strftime("%d/%m/%y") 
 		 %>
 
-		<% type.each do |x|  %>
-			<p class="lisp">Tipo:<%= x.name %></p>
-		<%end%>
-		<span class="editar">Creado:<%= input %>
+		<td><%= cli.type_client.name %></td>
+		<td><span class="editar">Creado:<%= input %>
 		<% 
 		   input = cli.updated_at
 		   input=input.strftime("%d/%m/%y") # => 05:21
 		 %>
 		
-		  Actualizado:<%= input %></span>
-	</div><br>
+		  Actualizado:<%= input %></span></td>
+		 </tr>
+
 <%end%>
+</table>
+<br>	
 <div class=' listado izquierdo'>
 	<%= link_to 'Crear Nuevo', new_client_path,:class => "crear" %>
 </div>

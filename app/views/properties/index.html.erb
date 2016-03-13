@@ -1,14 +1,24 @@
 <div style="width:80%; margin:0 auto;">
 	<h1>Atributos</h1>
-    
-</div>
-<% @p.each do |pro|  %>
-	<div class="listado caja">
-		<b><%= pro.name %></b>
-		<p class="lisp" ><%=pro.description %></p>
-		<%= link_to "Editar",edit_property_path(pro.id),:class => "editar" %>
-	</div><br>
-<%end%>
+
+ 
+<table align="center" style="font-size:150%;width:80%;" >
+		<tr>
+			<th style="width:30%;">Nombre</th>
+			<th>Descripcion</th>
+
+		</tr>
+		<% @p.each do |pro|  %>
+		<tr>
+		
+			<td><b><%= pro.name %></b></td>
+			<td><p class="lisp" ><%=pro.description %></p></td>
+			<td><%= link_to "Editar",edit_property_path(pro.id),:class => "editar" %></td>
+		
+		</tr>
+		<%end%>
+</table>
+<br>
 	<div class="listado izquierdo">
 	    <%= link_to 'Crear Nuevo', new_property_path,:class => "crear" %>
 	</div>	
