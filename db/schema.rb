@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313085310) do
+ActiveRecord::Schema.define(version: 20160313220747) do
 
   create_table "area_aims", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20160313085310) do
     t.date     "initiation"
     t.date     "ending"
     t.integer  "indicator",   limit: 4
+    t.integer  "user_id",     limit: 4
   end
 
   add_index "area_aims", ["area_id"], name: "index_area_aims_on_area_id", using: :btree
   add_index "area_aims", ["state_id"], name: "index_area_aims_on_state_id", using: :btree
+  add_index "area_aims", ["user_id"], name: "index_area_aims_on_user_id", using: :btree
 
   create_table "area_groups", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -164,7 +166,10 @@ ActiveRecord::Schema.define(version: 20160313085310) do
     t.date     "initiation"
     t.date     "ending"
     t.integer  "indicator",   limit: 4
+    t.integer  "user_id",     limit: 4
   end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -223,6 +228,7 @@ ActiveRecord::Schema.define(version: 20160313085310) do
 
   add_foreign_key "area_aims", "areas"
   add_foreign_key "area_aims", "states"
+  add_foreign_key "area_aims", "users"
   add_foreign_key "area_groups", "areas"
   add_foreign_key "client_activities", "clients"
   add_foreign_key "client_properties", "clients"
@@ -243,6 +249,7 @@ ActiveRecord::Schema.define(version: 20160313085310) do
   add_foreign_key "labors", "users"
   add_foreign_key "list_properties", "properties"
   add_foreign_key "list_properties", "type_clients"
+  add_foreign_key "projects", "users"
   add_foreign_key "properties", "kind_properties"
   add_foreign_key "properties", "states"
   add_foreign_key "type_clients", "states"

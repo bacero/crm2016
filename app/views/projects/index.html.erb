@@ -1,19 +1,49 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Proyectos</h1>
+<table align="center" style="width:100%; font-size:120%;">
+	<tr>
+		<th>Nombre</th>
+		<th>Descripcion</th>
+		<th>Inicio</th>
+		<th>Fin</th>
+		<th>Responsable</th>
+		<th>Indicador</th>
+	</tr>
 <% @p.each do |pro|  %>
-	<div class="listado caja">
-		<b><%= link_to pro.name,pro %></b>
-		<p class="lisp" ><%=pro.description %></p>
+	<tr>
+		<td><b><%= link_to pro.name,pro %></b></td>
+		<td><p class="lisp" ><%=pro.description %></p></td>
 		<% if pro.initiation && pro.ending %>
-			<p class="lisp" >Inicio: <%=pro.initiation.strftime("%m-%d-%Y")  %> Fin: <%=pro.ending.strftime("%m-%d-%Y")  %> </p>
-		<% 
-			else
-				%>
-				<p class="lisp" ><b>Proyecto Recurrente</b></p>
-		  <% end %>
-		<%= link_to "Editar",edit_project_path(pro.id),:class => "editar" %>
-	</div><br>
+			<td><p class="lisp" ><%=pro.initiation.strftime("%m-%d-%Y")  %></p></td>
+			<td><p class="lisp" ><%=pro.ending.strftime("%m-%d-%Y")  %> </p></td>
+		<% else	%>
+			<th colspan='2'><p class="lisp" ><b>Proyecto Recurrente</b></p></th>
+		<% end %>
+		<td>
+			<%= if pro.user
+						pro.user.username
+				end
+			%>
+		</td>
+		<td>
+			<%=
+				
+				if pro.labor_shifts.present?
+					pro.labor_shifts.last.advance
+					
+				else
+					0
+				end
+			 %> / <%=pro.indicator %> 
+		</td>
+
+
+		<th><%= link_to "Editar",edit_project_path(pro.id) %></th>
+	</tr>
+	
 <%end%>
+</table>
+<br>
 	<div class="listado izquierdo">
 	    <%= link_to 'Crear Nuevo', new_project_path,:class => "crear" %>
 	</div>	

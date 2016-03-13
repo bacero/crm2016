@@ -29,6 +29,10 @@
 			Fecha Finalizacion
 			<%= a.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
 		</div>
+		<div class="field">
+		    Usuario Asignado
+		    <%= a.collection_select :user_id, User.all, :id,:username, {prompt: 'Seleccione Usuario'}, class:"form-control" %>
+		  </div>
 		<div class="field" align='right'>
 			<%= a.submit "Guardar", class:"btn large-padding be-red" %>
 		</div>

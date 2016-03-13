@@ -29,23 +29,51 @@
 	<%end%>
 </div>
 <h2>METAS</h2>
-<% 	
-		@aims.each do |m| %>
-		<div class="listado caja" style="width:100%; text-align: left;">
-			<%= link_to m.name,m %>
-			<p class="lisp" ><%=m.description %></p>
-			<% if m.initiation && m.ending %>
-			<p class="lisp" >Inicio: <%=m.initiation.strftime("%m-%d-%Y")  %> Fin: <%=m.ending.strftime("%m-%d-%Y")  %> </p>
+<table style="font-size:100%; width:100% ">
+		<tr>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+			<th>Inicio</th>
+			<th>Fin</th>
+			<th>Responsable</th>
+			<th>Indicador</th>
+		</tr>
+
+<%@aims.each do |m| %>
+<tr>
+	<td><b><%= link_to m.name,m %></b></td>
+	<td><p class="lisp" style="font-size:70%;" ><%=m.description %></p></td>
+	<% if m.initiation && m.ending %>
+		<td><p class="lisp"style="font-size:100%;" ><%=m.initiation.strftime("%m-%d-%Y")  %> </p></td>
+		<td><p class="lisp"style="font-size:100%;" ><%=m.ending.strftime("%m-%d-%Y")  %> </p></td>
 		<% 
 			else
 				%>
-				<p class="lisp" ><b>Meta Recurrente</b></p>
+				<td colspan='2' ><p class="lisp" style="font-size:100%;" >Meta Recurrente</p></td>
 		  <% end %>
-			<%= link_to "Editar",edit_area_aim_path(m),:class => "editar" %> 
-		</div>
-		<br>
-	<%end%>
 
+		<td>
+			<%= if m.user
+					m.user.username
+				end
+			%>
+		</td>
+		<td>
+			<%=
+				
+				if m.labor_shifts.present?
+					m.labor_shifts.last.advance
+					
+				else
+					0
+				end
+			 %> / <%=m.indicator %>
+		</td>
+
+		<th><%= link_to "Editar",edit_area_aim_path(m),:class => "editar" %> </th>
+</tr>
+<%end%>
+</table>
 
 <script>
 $(function () {
@@ -96,6 +124,10 @@ $("#dialog").dialog("open");
 			Fecha Finalizacion
 			<%= a.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
 		</div>
+		<div class="field">
+		    Usuario Asignado
+		    <%= a.collection_select :user_id, User.all, :id,:username, {prompt: 'Seleccione Usuario'}, class:"form-control" %>
+		  </div>
 				
 		<div class="field" align='right'>
 			<%= a.submit "Guardar", class:"btn large-padding be-red" %>

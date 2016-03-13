@@ -26,6 +26,14 @@
 			<tr>
 				<td><b>Fin</b></td><td><%= @p.ending  %></td>
 			</tr>
+			<tr>
+				<td><b>Usuario Asignado</b></td><td>
+				<%= if @p.user
+						@p.user.username
+					end
+				
+				%></td>
+			</tr>
 		</table>
 	</div>
 <div class="field" align='right'>
@@ -34,7 +42,7 @@
 
 <h2> HISTORIAL DE AVANCES </h2>
 	<div class="listadodos caja">
-	<table style="font-size:55%; width:100%">
+	<table style="font-size:55%; width:100%;color:white;">
 		<tr>
 			<th>Avance</th>
 			<th>Observaciones</th>
@@ -45,7 +53,11 @@
 		<tr>
 			<td><%= ava.advance %></td>
 			<td><%=ava.description%></td>
-			<td></td>
+			<td><%=
+				if ava.user
+					ava.user.username
+				end %>
+			</td>
 			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
 			 
 		</tr>
@@ -63,7 +75,7 @@
 		<th>Inicio</th>
 		<th>Fin</th>
 		<th>Indicador</th>
-		<th>Estado</th>
+		<th>Usuario</th>
 	</tr>
 
 <% @labors.each do |l|  %>
@@ -76,9 +88,24 @@
 		<% 
 			else
 				%>
-				<td></td><td></td>
+				<th colspan='2'>Tarea recurrente</th>
 		  <% end %>
-		<td></td><td></td>	
+		<td> 
+			<%=
+				if l.labor_shifts.present?
+					l.labor_shifts.last.advance
+					
+				else
+					0
+				end
+			%>
+			/ <%=l.indicator%></td>
+			<td>
+				<%= if l.user
+						l.user.username
+				end
+			%>
+			</td>	
 		<td><%= link_to "Editar",edit_labor_path(l.id) %></td>
 <%end%>
 </table>

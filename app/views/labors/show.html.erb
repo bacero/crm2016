@@ -37,7 +37,7 @@
 	<br>
 <h2> HISTORIAL DE AVANCES </h2>
 	<div class="listadodos caja">
-	<table style="font-size:55%; width:100%">
+	<table style="font-size:55%; width:100% ;color:white;">
 		<tr>
 			<th>Avance</th>
 			<th>Observaciones</th>
@@ -101,7 +101,7 @@
 	<div class="listado caja">
 		<%=o.description %><br>
 
-		<p class="lisp" align="right"><%= o.created_at.strftime("%d-%m-%y ")  %> Por <%= u %></p>
+		<p class="lisp" align="right"><%= o.created_at.strftime("%d-%m-%y ")  %> By: <%= u %></p>
 	</div><br>
 <%end%>
 </div>
