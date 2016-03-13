@@ -1,6 +1,7 @@
 class LaborCommentsController < ApplicationController
 	def create
 		@co=LaborComment.new(comment_params)
+		@co.user_id=current_user.id
 		@co.save
 		p=params[:labor_comment]
 		la=p[:labor_id]

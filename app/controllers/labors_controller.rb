@@ -40,6 +40,10 @@ class LaborsController < ApplicationController
 			change = LaborChange.new(:property => "Finalizacion", :previus => @labor.initiation,:mint=>params[:labor][:initiation],:labor_id=>params[:id])
 			change.save
 		end
+		if @labor.user_id != params[:labor][:user_id]
+			change = LaborChange.new(:property => "Usuario", :previus => @labor.user_id,:mint=>params[:labor][:user_id],:labor_id=>params[:id])
+			change.save
+		end
 
 		if @labor.update(labor_params)
 			redirect_to @labor
@@ -54,9 +58,16 @@ class LaborsController < ApplicationController
 		@observations=LaborComment.where(["labor_id = "+params[:id]+" and kind = 1"])
 		@comment=LaborComment.new()
 		@comnents=LaborComment.where(["labor_id = "+params[:id]+" and kind = 2"])
+		@asignado=""
+		
+		if @labor.user
+			@asignado=@labor.user.username
+				
+		end
+		
 	end
 	private
 	def labor_params
-		params.require(:labor).permit(:name,:description,:indicator,:indicator_description,:ending,:initiation,:area_aim_id,:project_id,:state_id,:client_id)
+		params.require(:labor).permit(:name,:description,:indicator,:indicator_description,:ending,:initiation,:area_aim_id,:project_id,:state_id,:client_id,:user_id)
 	end
 end

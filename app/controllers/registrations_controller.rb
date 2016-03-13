@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 	 layout "loging"
 	 def new
-	 	super	 	
+	 	super
 	 end
 	 def create
 	 	super	 	

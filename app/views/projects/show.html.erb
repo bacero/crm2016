@@ -137,7 +137,10 @@ $("#dialog").dialog("open");
 			Fecha Finalizacion
 			<%= l.text_field:ending, placeholder: "Seleccione Fecha de Finalizacion", class:"form-control"%>
 		</div>
-			
+		<div class="field">
+		    Usuario Asignado
+		    <%= l.collection_select :user_id, User.all, :id,:username, {prompt: 'Seleccione Usuario'}, class:"form-control" %>
+		  </div>	
 		<%= l.hidden_field:project_id, :value => @p.id %>
 				
 		<div class="field" align='right'>

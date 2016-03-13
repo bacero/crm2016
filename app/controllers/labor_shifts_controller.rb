@@ -8,6 +8,7 @@ class LaborShiftsController < ApplicationController
 	end
 	def create
 		@shift=LaborShift.new(shift_params)
+		@shift.user_id=current_user.id
 		if @shift.save
 			p=params[:labor_shift]
 			if p[:project_id]

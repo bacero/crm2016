@@ -140,6 +140,10 @@ $("#dialog").dialog("open");
 			Cliente Asociado
 		<%= l.collection_select :client_id, Client.all, :id,:name, {prompt: 'Seleccione Cliente'}, class:"form-control" %>
 		</div>
+		<div class="field">
+		    Usuario Asignado
+		    <%= l.collection_select :user_id, User.all, :id,:username, {prompt: 'Seleccione Usuario'}, class:"form-control" %>
+		  </div>
 		
 		<%= l.hidden_field:area_aim_id, :value => @aim.id %>
 				

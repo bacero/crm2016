@@ -6,4 +6,6 @@ class Labor < ActiveRecord::Base
   validates :indicator, presence: true, length:{minimum: 1}
   validates :indicator_description, presence: true, length:{minimum: 3}
   has_many :labor_shifts
+  belongs_to :user
+
 end

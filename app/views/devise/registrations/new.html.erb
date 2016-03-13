@@ -1,29 +1,41 @@
-<h2>Sign up</h2>
-
+<div style="width:60%; margin:0 auto;">
+  <div class="field" align='right'>
+   <%= render "devise/shared/links" %>
+  </div>
+<h2>Creacion de Usuario</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    Correo
+    <%= f.email_field :email,placeholder: "Ingrese Email", autofocus: true , class:"form-control" %>
+  </div>
+  <div class="field">
+   Nombre de Usuario
+    <%= f.text_field :username ,placeholder: "Ingrese Nombre de Usuario", class:"form-control"%>
+  </div>
+  <div class="field">
+    Tipo de Usuario
+    <%= f.collection_select :type_user_id, TypeUser.all, :id,:name, {prompt: 'Seleccione Tipo'}, class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+   Nueva Contrasena
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+   
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password,placeholder: "Ingrese Contrasena ( #{@minimum_password_length}characters minimum)", autocomplete: "off",class:"form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    Confirmacion de Contrasena
+    <%= f.password_field :password_confirmation,placeholder: "Confirmar para guardar", autocomplete: "off" , class:"form-control"%>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+ <div class="field" align='right'>
+    <%= f.submit "CREAR USUARIO", class:"btn large-padding be-red" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+
+</div>  

@@ -1,5 +1,5 @@
 <div style="width:80%; margin:0 auto;">
-<h1>Hi User</h1>
+<h1>Hi <%= current_user.username %></h1>
 <p>
 <script>
   $(function() {
@@ -61,7 +61,7 @@
 			if a
 				h=a.advance
 			end
-		if h<l.indicator %>
+		if h<=l.indicator %>
 			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
 	    		<td><%=l.description %></td>
 	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>
@@ -96,7 +96,7 @@
 			if a
 				h=a.advance
 			end
-		if h>l.indicator %>
+		if h>=l.indicator %>
 			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
 	    		<td><%=l.description %></td>
 	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>

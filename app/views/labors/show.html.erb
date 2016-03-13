@@ -29,6 +29,9 @@
 			<tr>
 				<td><b>Fin</b></td><td><%= @labor.ending  %></td>
 			</tr>
+			<tr>
+				<td><b>Asignado a </b></td><td><%=@asignado%></td>
+			</tr>
 		</table>
 	</div>
 	<br>
@@ -45,7 +48,12 @@
 		<tr>
 			<td><%= ava.advance %></td>
 			<td><%=ava.description%></td>
-			<td></td>
+			<% if ava.user %>
+				<td><%=ava.user.username%></td>
+			<% else %>
+				<td></td>
+			<%end %>
+			
 			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
 			 
 		</tr>
@@ -84,10 +92,16 @@
 	<%end%>
 </div>
 <div>
-	<% @comnents.each do |o|  %>		
+	<% @comnents.each do |o|  
+		u=""
+		if o.user
+			u=o.user.username
+		end
+		%>		
 	<div class="listado caja">
 		<%=o.description %><br>
-		<p class="lisp" align="right"><%= o.created_at.strftime("%y-%m-%d ")  %></p>
+
+		<p class="lisp" align="right"><%= o.created_at.strftime("%d-%m-%y ")  %> Por <%= u %></p>
 	</div><br>
 <%end%>
 </div>

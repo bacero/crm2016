@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruandes</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<header>
+
+		<nav class="be-red white large-padding"> 
+			
+					<h1 >Fruandes</h1>
+		
+		</nav>
+</header>
+
+	<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
 <%= yield %>
+<br>
+<br>
+</body>
+</html>
+
+
