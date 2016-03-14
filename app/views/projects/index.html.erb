@@ -1,6 +1,7 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Proyectos</h1>
-<table align="center" style="width:100%; font-size:120%;">
+<table align="center" id="myTable" style="width:100%; font-size:120%;">
+	<thead>
 	<tr>
 		<th>Nombre</th>
 		<th>Descripcion</th>
@@ -9,6 +10,8 @@
 		<th>Responsable</th>
 		<th>Indicador</th>
 	</tr>
+</thead>
+<tbody>
 <% @p.each do |pro|  %>
 	<tr>
 		<td><b><%= link_to pro.name,pro %></b></td>
@@ -17,7 +20,7 @@
 			<td><p class="lisp" ><%=pro.initiation.strftime("%m-%d-%Y")  %></p></td>
 			<td><p class="lisp" ><%=pro.ending.strftime("%m-%d-%Y")  %> </p></td>
 		<% else	%>
-			<th colspan='2'><p class="lisp" ><b>Proyecto Recurrente</b></p></th>
+			<td colspan='2'><p class="lisp" ><b>Proyecto Recurrente</b></p></td>
 		<% end %>
 		<td>
 			<%= if pro.user
@@ -42,6 +45,7 @@
 	</tr>
 	
 <%end%>
+</tbody>
 </table>
 <br>
 <% if current_user.type_user_id==3%>
@@ -49,8 +53,11 @@
 	    <%= link_to 'Crear Nuevo', new_project_path,:class => "crear" %>
 	</div>
 <% end%>
-		
 
 
-	
 </div>
+<script type="text/javascript">
+$(function(){
+  $("#myTable").tablesorter();
+});
+</script>
