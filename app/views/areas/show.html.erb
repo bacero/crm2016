@@ -29,7 +29,8 @@
 	<%end%>
 </div>
 <h2>METAS</h2>
-<table style="font-size:100%; width:100% ">
+<table style="width:100%;font-size:80% " id="myTable">
+<thead>
 		<tr>
 			<th>Nombre</th>
 			<th>Descripcion</th>
@@ -38,11 +39,12 @@
 			<th>Responsable</th>
 			<th>Indicador</th>
 		</tr>
-
+</thead>
+<tbody>
 <%@aims.each do |m| %>
 <tr>
 	<td><b><%= link_to m.name,m %></b></td>
-	<td><p class="lisp" style="font-size:70%;" ><%=m.description %></p></td>
+	<td><p class="lisp" style="font-size:100%;" ><%=m.description %></p></td>
 	<% if m.initiation && m.ending %>
 		<td><p class="lisp"style="font-size:100%;" ><%=m.initiation.strftime("%m-%d-%Y")  %> </p></td>
 		<td><p class="lisp"style="font-size:100%;" ><%=m.ending.strftime("%m-%d-%Y")  %> </p></td>
@@ -70,9 +72,10 @@
 			 %> / <%=m.indicator %>
 		</td>
 
-		<th><%= link_to "Editar",edit_area_aim_path(m),:class => "editar" %> </th>
+		<td><%= link_to "Editar",edit_area_aim_path(m) %> </td>
 </tr>
 <%end%>
+</tbody>
 </table>
 
 <script>
@@ -139,3 +142,8 @@ $("#dialog").dialog("open");
 </div>
 </div>
 
+<script type="text/javascript">
+$(function(){
+  $("#myTable").tablesorter();
+});
+</script>

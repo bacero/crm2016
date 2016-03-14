@@ -16,7 +16,8 @@
     <li><a href="#tabs-3">Inactivas</a></li>
   </ul>
   <div id="tabs-1">
-  	<table style="width:100%">
+  	<table style="width:100%"  id="myTable1">
+  	<thead>
   		<tr>
   			<th>Nombre</th>
   			<th>Descripcion</th>
@@ -24,6 +25,8 @@
   			<th>Estado<br> Indicador</th>
   			
   		</tr>
+ 	</thead>
+	<tbody>
 	    <% @recurrent.each do |re|  %>
 	   		<% a=LaborShift.where("labor_id=#{re.id}").last %>
 	    	<tr>
@@ -41,10 +44,12 @@
 				<td><%= link_to "Ver Tarea Completa",labor_path(re.id) %></td>
 	    	</tr>
 	    <% end %>
+	</tbody>
     </table>
   </div>
   <div id="tabs-2">
-  	<table style="width:100%">
+  	<table style="width:100%"  id="myTable2">
+  	<thead>
   		<tr>
   			<th>Nombre</th>
   			<th>Descripcion</th>
@@ -54,14 +59,17 @@
   			<th>Estado<br> Indicador</th>
   			
   		</tr>
+  	</thead>
+	<tbody>
     <% @labors.each do |l|  %>
-    	<tr>
+    	
 		<% a=LaborShift.where("labor_id=#{l.id}").last
 			h=0
 			if a
 				h=a.advance
 			end
 		if h<=l.indicator %>
+			<tr>
 			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
 	    		<td><%=l.description %></td>
 	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>
@@ -72,14 +80,16 @@
 					 / <%= l.indicator %>
 				</td>
 				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
-			
+			</tr>
 		<% end%>
-		</tr>
+		
 	<% end %>
+	</tbody>
 	</table>
   </div>
   <div id="tabs-3">
-    <table style="width:100%">
+    <table style="width:100%"  id="myTable3">
+    <thead>
   		<tr>
   			<th>Nombre</th>
   			<th>Descripcion</th>
@@ -89,14 +99,17 @@
   			<th>Estado<br> Indicador</th>
   			
   		</tr>
+  	</thead>
+	<tbody>
     <% @labors.each do |l|  %>
-    	<tr>
+    	
 		<% a=LaborShift.where("labor_id=#{l.id}").last
 			h=0
 			if a
 				h=a.advance
 			end
 		if h>=l.indicator %>
+			<tr>
 			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
 	    		<td><%=l.description %></td>
 	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>
@@ -107,10 +120,11 @@
 					 / <%= l.indicator %>
 				</td>
 				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
-			
+			</tr>
 		<% end%>
-		</tr>
+		
 	<% end %>
+	</tbody>
 	</table>
   </div>
 </div>
@@ -120,3 +134,10 @@
 </div>
 
 
+<script type="text/javascript">
+$(function(){
+  $("#myTable1").tablesorter();
+  $("#myTable2").tablesorter();
+  $("#myTable3").tablesorter();
+});
+</script>
