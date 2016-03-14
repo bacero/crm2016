@@ -16,15 +16,17 @@
 					<h1 class="no-margin" id="logo">Fruandes</h1>
 				</li>
 				<li class="col-md"><%= link_to "Inicio",root_path %></li>
-				<li><a href="">Administracion</a>
+				<%
+					if current_user.type_user_id==1%>
+						<li><a href="">Administracion</a>
 						<ul>
 							<li class="col-md"><%= link_to "Atributos",properties_path %></li>
 							<li class="col-md"><%= link_to "Tipo Clientes",type_clients_path %></li>
+							<li class="col-md"><%= link_to "Clientes",clients_path %></li>
 						</ul>
-				</li>
-				
+						</li>
+				  <%end%>
 
-				<li class="col-md"><%= link_to "Clientes",clients_path %></li>	
 				<li class="col-md"><%= link_to "Areas",areas_path %></li>	
 				<li class="col-md"><%= link_to "Proyectos",projects_path %></li>
 				

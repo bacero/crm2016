@@ -44,9 +44,12 @@
 <%end%>
 </table>
 <br>
+<% if current_user.type_user_id==3%>
 	<div class="listado izquierdo">
 	    <%= link_to 'Crear Nuevo', new_project_path,:class => "crear" %>
-	</div>	
+	</div>
+<% end%>
+		
 
 
 	

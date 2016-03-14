@@ -89,9 +89,12 @@ $("#dialog").dialog("open");
 });
 });
 </script>
-<div class="field" align='right'>
+<% if current_user.type_user_id==3%>
+		<div class="field" align='right'>
 <button id="abrir">Agregar Meta</button>
 </div>
+	<% end%>
+
 
 <div id="dialog" title="Crear Nueva Meta">
 <%= form_for(@aim) do |a| %>
