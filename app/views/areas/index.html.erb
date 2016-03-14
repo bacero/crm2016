@@ -1,10 +1,13 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Areas</h1>
-<table align="center" style="font-size:150%;width:80%;" >
+<table align="center" id="myTable" style="font-size:150%;width:80%;" >
+<thead>
 	<tr>
 		<th>Nombre</th>
 		<th>descripcion</th>
 	</tr>
+</thead>
+<tbody>
 <% @area.each do |a|  %>
 	<tr>
 		<td><b><%= link_to a.name,a %></b></td>
@@ -12,12 +15,17 @@
 		<td><%= link_to "Editar",edit_area_path(a),:class => "editar" %> </td>
 	</tr>
 <%end%>
+</tbody>
 </table>
 	<% if current_user.type_user_id==3%>
 		<div class=' listado izquierdo'>
 			<%= link_to 'Crear Nueva', new_area_path,:class => "crear" %>
 		</div>
 	<% end%>
-
-
 </div>
+
+<script type="text/javascript">
+$(function(){
+  $("#myTable").tablesorter();
+});
+</script>
