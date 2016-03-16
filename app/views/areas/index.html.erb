@@ -1,6 +1,6 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Areas</h1>
-<table align="center" id="myTable" style="font-size:150%;width:80%;" >
+<table align="center" id="myTable"  >
 <thead>
 	<tr>
 		<th>Nombre</th>
@@ -11,13 +11,14 @@
 <% @area.each do |a|  %>
 	<tr>
 		<td><b><%= link_to a.name,a %></b></td>
-		<td><p class="lisp"><%= a.description %></p></td>
-		<td><%= link_to "Editar",edit_area_path(a),:class => "editar" %> </td>
+		<td><%= a.description %></td>
+		<td><%= link_to "Editar",edit_area_path(a) %> </td>
 	</tr>
 <%end%>
 </tbody>
 </table>
-	<% if current_user.type_user_id==3%>
+
+	<% if current_user.type_user_id==3 || current_user.type_user_id==1%>
 		<div class=' listado izquierdo'>
 			<%= link_to 'Crear Nueva', new_area_path,:class => "crear" %>
 		</div>

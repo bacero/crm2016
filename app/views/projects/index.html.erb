@@ -1,6 +1,6 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Proyectos</h1>
-<table align="center" id="myTable" style="width:100%; font-size:120%;">
+<table align="center" id="myTable" style="width:100%;">
 	<thead>
 	<tr>
 		<th>Nombre</th>
@@ -15,12 +15,12 @@
 <% @p.each do |pro|  %>
 	<tr>
 		<td><b><%= link_to pro.name,pro %></b></td>
-		<td><p class="lisp" ><%=pro.description %></p></td>
+		<td><%=pro.description %></td>
 		<% if pro.initiation && pro.ending %>
-			<td><p class="lisp" ><%=pro.initiation.strftime("%m-%d-%Y")  %></p></td>
-			<td><p class="lisp" ><%=pro.ending.strftime("%m-%d-%Y")  %> </p></td>
+			<td><%=pro.initiation.strftime("%m-%d-%Y")  %></td>
+			<td><%=pro.ending.strftime("%m-%d-%Y")  %></td>
 		<% else	%>
-			<td colspan='2'><p class="lisp" ><b>Proyecto Recurrente</b></p></td>
+			<td colspan='2'>Proyecto Recurrente</td>
 		<% end %>
 		<td>
 			<%= if pro.user
@@ -41,14 +41,14 @@
 		</td>
 
 
-		<th><%= link_to "Editar",edit_project_path(pro.id) %></th>
+		<td><%= link_to "Editar",edit_project_path(pro.id) %></td>
 	</tr>
 	
 <%end%>
 </tbody>
 </table>
 <br>
-<% if current_user.type_user_id==3%>
+<% if current_user.type_user_id==3 || current_user.type_user_id==1%>
 	<div class="listado izquierdo">
 	    <%= link_to 'Crear Nuevo', new_project_path,:class => "crear" %>
 	</div>

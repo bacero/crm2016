@@ -2,7 +2,7 @@
 	<h1>Atributos</h1>
 
  
-<table align="center" style="font-size:150%;width:80%;" >
+<table align="center" style="width:80%;" >
 		<tr>
 			<th style="width:30%;">Nombre</th>
 			<th>Descripcion</th>
@@ -12,8 +12,8 @@
 		<tr>
 		
 			<td><b><%= pro.name %></b></td>
-			<td><p class="lisp" ><%=pro.description %></p></td>
-			<td><%= link_to "Editar",edit_property_path(pro.id),:class => "editar" %></td>
+			<td><%=pro.description %></td>
+			<td><%= link_to "Editar",edit_property_path(pro.id) %></td>
 		
 		</tr>
 		<%end%>

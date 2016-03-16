@@ -8,46 +8,7 @@
   </script>
 </head>
 <body>
- 
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Recurrentes</a></li>
-    <li><a href="#tabs-2">Activas</a></li>
-    <li><a href="#tabs-3">Inactivas</a></li>
-  </ul>
-  <div id="tabs-1">
-  	<table style="width:100%"  id="myTable1">
-  	<thead>
-  		<tr>
-  			<th>Nombre</th>
-  			<th>Descripcion</th>
-  			<th>Indicador</th>
-  			<th>Estado<br> Indicador</th>
-  			
-  		</tr>
- 	</thead>
-	<tbody>
-	    <% @recurrent.each do |re|  %>
-	   		<% a=LaborShift.where("labor_id=#{re.id}").last %>
-	    	<tr>
-	    		<td><%= link_to re.name,new_labor_shift_path(:labor_id => re.id,:name => re.name)%></td>
-	    		<td><%=re.description %></td>
-	    		<td><%=re.indicator_description%></td>
-	    		<td style="text-align: center;";><%= if a
-							a.advance
-						else
-							0
-						end
-						 %>
-					 / <%= re.indicator %>
-				</td>
-				<td><%= link_to "Ver Tarea Completa",labor_path(re.id) %></td>
-	    	</tr>
-	    <% end %>
-	</tbody>
-    </table>
-  </div>
-  <div id="tabs-2">
+
   	<table style="width:100%"  id="myTable2">
   	<thead>
   		<tr>
@@ -57,6 +18,9 @@
   			<th>Fin</th>
   			<th>Indicador</th>
   			<th>Estado<br> Indicador</th>
+  			<th>Estado</th>
+  			<th>Meta/Proyecto</th>
+  			<th>Area</th>
   			
   		</tr>
   	</thead>
@@ -68,66 +32,58 @@
 			if a
 				h=a.advance
 			end
-		if h<=l.indicator %>
+		 %>
 			<tr>
 			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
 	    		<td><%=l.description %></td>
-	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>
-	    		<td><%=l.ending.strftime("%d-%m-%Y")  %></td>
+	    		<% if l.initiation && l.ending %>
+	    			<td><%=	l.initiation.strftime("%d-%m-%Y") %></td>
+	    			<td><%= l.ending.strftime("%d-%m-%Y")   %></td>
+	    		<% else%>
+	    			<td colspan='2'>Tarea Recurrente</td>
+
+	    		<%end%>
 	    		<td><%=l.indicator_description%></td>
 	    		<td style="text-align: center;";>
 	    			<%= h %>
-					 / <%= l.indicator %>
+					 / <%= l.indicator  %>
 				</td>
+				<%	if l.indicator<=h %>
+						<td> Terminado </td>
+				   <%else 
+				   		if l.initiation && l.ending 
+				   			if DateTime.now.to_date > l.ending %>
+				   				<td> Atrasado </td>
+				   		  <%else%>
+				   		  		<td> En Ejecucion </td>
+
+				   		  <%end%>
+
+				   		<%else%>
+				   			<td> En Ejecucion </td>
+				   		 <% end %>
+
+				   <%end%>
+				<% if l.project%>
+					<td> <%= l.project.name  %> </td>
+					<td></td>	
+				<%end%>
+				<% if l.area_aim%>
+					<td> <%= l.area_aim.name  %> </td>
+					<% if l.area_aim.area %>
+						<td> <%= l.area_aim.area.name %> </td>	
+					<%end%>	
+				<%end%>
+				
+
+				
 				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
 			</tr>
-		<% end%>
+		
 		
 	<% end %>
 	</tbody>
-	</table>
-  </div>
-  <div id="tabs-3">
-    <table style="width:100%"  id="myTable3">
-    <thead>
-  		<tr>
-  			<th>Nombre</th>
-  			<th>Descripcion</th>
-  			<th>Inicio</th>
-  			<th>Fin</th>
-  			<th>Indicador</th>
-  			<th>Estado<br> Indicador</th>
-  			
-  		</tr>
-  	</thead>
-	<tbody>
-    <% @labors.each do |l|  %>
-    	
-		<% a=LaborShift.where("labor_id=#{l.id}").last
-			h=0
-			if a
-				h=a.advance
-			end
-		if h>=l.indicator %>
-			<tr>
-			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
-	    		<td><%=l.description %></td>
-	    		<td><%=l.initiation.strftime("%d-%m-%Y")%></td>
-	    		<td><%=l.ending.strftime("%d-%m-%Y")  %></td>
-	    		<td><%=l.indicator_description%></td>
-	    		<td style="text-align: center;";>
-	    			<%= h %>
-					 / <%= l.indicator %>
-				</td>
-				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
-			</tr>
-		<% end%>
-		
-	<% end %>
-	</tbody>
-	</table>
-  </div>
-</div>
+</table>
 
 
 	

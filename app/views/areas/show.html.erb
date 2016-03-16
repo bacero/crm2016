@@ -29,7 +29,7 @@
 	<%end%>
 </div>
 <h2>METAS</h2>
-<table style="width:100%;font-size:80% " id="myTable">
+<table style="width:100%" id="myTable">
 <thead>
 		<tr>
 			<th>Nombre</th>
@@ -44,14 +44,14 @@
 <%@aims.each do |m| %>
 <tr>
 	<td><b><%= link_to m.name,m %></b></td>
-	<td><p class="lisp" style="font-size:100%;" ><%=m.description %></p></td>
+	<td><%=m.description %></td>
 	<% if m.initiation && m.ending %>
-		<td><p class="lisp"style="font-size:100%;" ><%=m.initiation.strftime("%m-%d-%Y")  %> </p></td>
-		<td><p class="lisp"style="font-size:100%;" ><%=m.ending.strftime("%m-%d-%Y")  %> </p></td>
+		<td><%=m.initiation.strftime("%m-%d-%Y")  %> </td>
+		<td><%=m.ending.strftime("%m-%d-%Y")  %></td>
 		<% 
 			else
 				%>
-				<td colspan='2' ><p class="lisp" style="font-size:100%;" >Meta Recurrente</p></td>
+				<td colspan='2' >Meta Recurrente</td>
 		  <% end %>
 
 		<td>
@@ -92,7 +92,7 @@ $("#dialog").dialog("open");
 });
 });
 </script>
-<% if current_user.type_user_id==3%>
+<% if current_user.type_user_id==3 || current_user.type_user_id==1%>
 		<div class="field" align='right'>
 <button id="abrir">Agregar Meta</button>
 </div>
