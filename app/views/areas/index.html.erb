@@ -19,9 +19,9 @@
 </table>
 
 	<% if current_user.type_user_id==3 || current_user.type_user_id==1%>
-		<div class=' listado izquierdo'>
-			<%= link_to 'Crear Nueva', new_area_path,:class => "crear" %>
-		</div>
+		<div class="field" align='right'>
+<button id="abrir">Crear Area</button>
+</div>
 	<% end%>
 </div>
 
@@ -30,3 +30,42 @@ $(function(){
   $("#myTable").tablesorter();
 });
 </script>
+ <script>
+$(function () {
+$("#dialog").dialog({
+autoOpen: false,
+modal: true
+});
+$("#abrir")
+.button()
+.click(function () {
+$("#dialog").dialog("option", "width", 400);
+$("#dialog").dialog("open");
+});
+});
+</script>
+<div id="dialog" title="Crear Area">
+<%= form_for(@ar) do |f| %>
+	<% @ar.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+	<%end%>
+	<div class="field">
+		Nombre
+		<%= f.text_field:name, placeholder: "Ingrese Valor para Nombre", class:"form-control"%>
+	</div>
+	
+	<div class="field">
+		Descripcion
+		<%= f.text_area:description, placeholder: "Ingrese Descripcion", class:"form-control"%>
+	</div>
+	<div class="field">
+		Creador
+		<%= f.text_field:creator, placeholder: "Ingrese Nombre de Creador", class:"form-control"%>
+	</div>
+	<div class="field" align='right'>
+		<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+	</div>
+
+<%end%>
+</div>
+

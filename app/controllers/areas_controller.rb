@@ -1,6 +1,7 @@
 class AreasController < ApplicationController
 	def index
 		@area = Area.all
+		@ar = Area.new()
 	end
 	def new
 		@area = Area.new()
