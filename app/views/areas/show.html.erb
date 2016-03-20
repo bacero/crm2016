@@ -3,14 +3,14 @@
 	    
 <h2>GRUPO DE TRABAJO</h2>
 	       
-<div class="listado caja" style="width:100%; text-align: left;">
+
 	
 	<% 	gru = AreaGroup.where("area_id=#{@area.id}").select('name')
 		gru.each do |g| %>
 
 			<%= g.name %> <br>
 	<%end%>
-</div>
+	
 
 <div>
 	<%= form_for(@group) do |g| %>
