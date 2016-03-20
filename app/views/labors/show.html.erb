@@ -6,11 +6,36 @@
 	 
 	%>  
 	<div>
-		<table align="center" style="font-size:150%;" >
+		<table align="center" style="font-size:150%; width:60%;">
+			<tr>
+				<td><b>Nombre</b></td><td><%= @labor.name %></td>
+			</tr>
 			<tr>
 				<td><b>Descripcion</b></td><td><%= @labor.description %></td>
 			</tr>
+			
 			<tr>
+				<td><b>Inicio</b></td><td><%= @labor.initiation %></td>
+			</tr>
+			<tr>
+				<td><b>Fin</b></td><td><%= @labor.ending  %></td>
+			</tr>
+			<tr>
+				<td><b>Asignado a </b></td><td><%=@asignado%></td>
+			</tr>
+			<tr>
+				<td><b>Cliente</b></td>
+				<td>
+					<%if @labor.client %>
+						<%= @labor.client.name %>
+					<%end%>
+
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center" style="font-size:150%; width:60%;">
+		<tr>
 				<td><b>Descripcion Indicador</b></td><td><%= @labor.indicator_description %></td>
 			</tr>
 			<tr>
@@ -22,17 +47,7 @@
 				end
 				
 				%>/<%= @labor.indicator %></td>
-			</tr>
-			<tr>
-				<td><b>Inicio</b></td><td><%= @labor.initiation %></td>
-			</tr>
-			<tr>
-				<td><b>Fin</b></td><td><%= @labor.ending  %></td>
-			</tr>
-			<tr>
-				<td><b>Asignado a </b></td><td><%=@asignado%></td>
-			</tr>
-		</table>
+			</tr></table>
 	</div>
 	<br>
 <h2> HISTORIAL DE AVANCES </h2>

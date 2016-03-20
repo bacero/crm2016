@@ -5,11 +5,31 @@
 		e=LaborShift.where("project_id=#{@p.id}")
 	 
 	%>  
-		<table align="center" style="font-size:150%;" >
-			
+		<table align="center" style="font-size:150%; width:60%;" >
+			<tr>
+				<td><b>Nombre</b></td><td><%= @p.name %></td>
+			</tr>
 			<tr>
 				<td><b>Descripcion</b></td><td><%= @p.description %></td>
 			</tr>
+			
+			<tr>
+				<td><b>Inicio</b></td><td><%= @p.initiation %></td>
+			</tr>
+			<tr>
+				<td><b>Fin</b></td><td><%= @p.ending  %></td>
+			</tr>
+			<tr>
+				<td><b>Responsable</b></td><td>
+				<%= if @p.user
+						@p.user.username
+					end
+				
+				%></td>
+			</tr>
+		</table>
+		<br>
+		<table align="center" style="font-size:150%; width:60%;">
 			<tr>
 				<td><b>Indicador</b></td><td><%= 
 				if a
@@ -21,49 +41,33 @@
 				%>/<%= @p.indicator %></td>
 			</tr>
 			<tr>
-				<td><b>Inicio</b></td><td><%= @p.initiation %></td>
-			</tr>
-			<tr>
-				<td><b>Fin</b></td><td><%= @p.ending  %></td>
-			</tr>
-			<tr>
-				<td><b>Usuario Asignado</b></td><td>
-				<%= if @p.user
-						@p.user.username
-					end
-				
-				%></td>
+				<td><b>Observacion</b></td>
+				<td><%= @p.observation  %></td>
 			</tr>
 		</table>
 	</div>
-<div class="field" align='right'>
-<%= link_to "Agregar Avance",new_labor_shift_path(:project_id => @p.id,:name => @p.name),class:"btn large-padding be-red"%>
-</div>
-
-<h2> HISTORIAL DE AVANCES </h2>
-	
-	<table style="width:100%;">
-		<tr>
-			<th>Avance</th>
-			<th>Observaciones</th>
-			<th>Usuario</th>
-			<th>fecha</th>
-		</tr>
-	<% e.each do |ava|  %>
-		<tr>
-			<td><%= ava.advance %></td>
-			<td><%=ava.description%></td>
-			<td><%=
-				if ava.user
-					ava.user.username
-				end %>
-			</td>
-			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
-			 
-		</tr>
+<div style="width:60%; margin:0 auto;">
+<h1><%= @name %></h1>
+<%= form_for(@shift) do |s| %>
+	<% @shift.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
 	<%end%>
-	</table>  
-
+	<div class="field">
+		Avance
+		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
+	</div>
+	<div class="field">
+		Descripcion
+		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
+	</div>
+	
+	<%= s.hidden_field:project_id, :value =>@p.id %>
+	
+	<div class="field" align='right'>
+		<%= s.submit "Guardar", class:"btn large-padding" %>
+	</div>
+<%end%>
+</div>
 <h2>TAREAS</h2>
 
 
@@ -112,6 +116,36 @@
 <%end%>
 </tbody>
 </table>
+<div class="field" align='right'>
+<button id="abrir">Crear Tarea</button>
+</div>
+
+
+<h2> HISTORIAL DE AVANCES </h2>
+	
+	<table style="width:100%;">
+		<tr>
+			<th>Avance</th>
+			<th>Observaciones</th>
+			<th>Usuario</th>
+			<th>fecha</th>
+		</tr>
+	<% e.each do |ava|  %>
+		<tr>
+			<td><%= ava.advance %></td>
+			<td><%=ava.description%></td>
+			<td><%=
+				if ava.user
+					ava.user.username
+				end %>
+			</td>
+			<td><%=ava.created_at.strftime("%m-%d-%Y")%></td>
+			 
+		</tr>
+	<%end%>
+	</table>  
+
+
 <script type="text/javascript">
 $(function(){
   $("#myTable").tablesorter();
@@ -134,9 +168,6 @@ $("#dialog").dialog("open");
 });
 });
 </script>
-<div class="field" align='right'>
-<button id="abrir">Crear Tarea</button>
-</div>
 
 <div id="dialog" title="Crear Nueva Tarea">
 <%= form_for(@labor) do |l| %>

@@ -20,6 +20,17 @@ class LaborShiftsController < ApplicationController
 			else
 				redirect_to root_path
 			end
+		else
+			p=params[:labor_shift]
+			if p[:project_id]
+				@p = Project.find(p[:project_id])
+				redirect_to @p
+			elsif p[:area_aim_id]
+				@p = AreaAim.find(p[:area_aim_id])
+				redirect_to @p
+			else
+				redirect_to root_path
+			end
 		end
 	end
 

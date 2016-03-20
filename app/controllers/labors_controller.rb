@@ -2,12 +2,23 @@ class LaborsController < ApplicationController
 	def create
 		@labor=Labor.new(labor_params)
 		if @labor.save
-			redirect_to @labor
+			if params[:labor][:project_id]
+			   r = Project.find(params[:labor][:project_id])
+			end
+			if params[:labor][:area_aim_id]
+			   r= AreaAim.find(params[:labor][:area_aim_id])
+			end
+			redirect_to r
+					
 		else
-			p=params[:labor]
-			p=p[:area_aim_id]
-			@a = AreaAim.find(p)
-			redirect_to @a
+			if params[:labor][:project_id]
+			   r = Project.find(params[:labor][:project_id])
+			end
+			if params[:labor][:area_aim_id]
+			   r= AreaAim.find(params[:labor][:area_aim_id])
+			end
+			redirect_to r
+			
 		end
 	end
 	def edit

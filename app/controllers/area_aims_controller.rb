@@ -15,6 +15,7 @@ class AreaAimsController < ApplicationController
 		@aim=AreaAim.find(params[:id])
 		@labors = Labor.where('area_aim_id='+params[:id])
 		@labor = Labor.new()	
+		@shift=LaborShift.new()
 	end
 
 	def edit

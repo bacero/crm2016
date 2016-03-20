@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313220747) do
+ActiveRecord::Schema.define(version: 20160320040214) do
 
   create_table "area_aims", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160313220747) do
     t.date     "ending"
     t.integer  "indicator",   limit: 4
     t.integer  "user_id",     limit: 4
+    t.text     "observation", limit: 65535
   end
 
   add_index "area_aims", ["area_id"], name: "index_area_aims_on_area_id", using: :btree
@@ -167,6 +168,7 @@ ActiveRecord::Schema.define(version: 20160313220747) do
     t.date     "ending"
     t.integer  "indicator",   limit: 4
     t.integer  "user_id",     limit: 4
+    t.text     "observation", limit: 65535
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree

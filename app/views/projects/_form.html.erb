@@ -14,6 +14,10 @@
 			Indicador
 			<%= f.number_field:indicator,min:1, placeholder: "Cantidad de Indicador", :class => 'text_field', :step => 'any',class:"form-control" %>
 		</div>
+	<div class="field">
+		Observacion 
+		<%= f.text_area:observation, placeholder: "Observacion", class:"form-control"%>
+	</div>
 		<div class="field">
 			Fecha Inicio
 			<script type="text/javascript">$(function() {

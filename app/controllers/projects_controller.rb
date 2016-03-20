@@ -5,11 +5,13 @@ class ProjectsController < ApplicationController
 	end
 	def new
 		@p = Project.new()
+
 	end
 	def show
 		@p = Project.find(params[:id])
 		@labors = Labor.where('project_id='+params[:id])
 		@labor = Labor.new()
+		@shift=LaborShift.new()
 	end
 	def edit
 		@p = Project.find(params[:id])
@@ -32,6 +34,6 @@ class ProjectsController < ApplicationController
 	end
 	private
 	def project_params
-		params.require(:project).permit(:name,:description,:indicator,:initiation,:ending,:user_id)
+		params.require(:project).permit(:name,:description,:indicator,:initiation,:ending,:user_id,:observation)
 	end
 end

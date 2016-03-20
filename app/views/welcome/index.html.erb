@@ -34,7 +34,9 @@
 			end
 		 %>
 			<tr>
-			<td><%= link_to l.name,new_labor_shift_path(:labor_id => l.id,:name => l.name)%></td>
+				
+			<td><button class="abrir" style="background:#FFFFFF;border:none;text-align: left;" value="<%=l.id%>"><%=l.name%></button></td>
+
 	    		<td><%=l.description %></td>
 	    		<% if l.initiation && l.ending %>
 	    			<td><%=	l.initiation.strftime("%d-%m-%Y") %></td>
@@ -75,7 +77,6 @@
 					<%end%>	
 				<%end%>
 				
-
 				
 				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
 			</tr>
@@ -91,9 +92,62 @@
 
 
 <script type="text/javascript">
+function Tarea(t){
+	
+	document.getElementById("labor_shift_labor_id").value=t;
+	x=document.getElementById("labor_shift_labor_id").value;
+	
+	$("#dialog").dialog("option", "width", 400);
+	$("#dialog").dialog("open");
+	
+}
+
+
 $(function(){
   $("#myTable1").tablesorter();
   $("#myTable2").tablesorter();
   $("#myTable3").tablesorter();
 });
 </script>
+<br>
+
+ <script>
+$(function () {
+$("#dialog").dialog({
+autoOpen: false,
+modal: true
+});
+$(".abrir")
+.button()
+.click(function () {
+$("#dialog").dialog("option", "width", 400);
+$("#dialog").dialog("open");
+$("#labor_shift_labor_id").val(this.value);
+$("#titulo").text($(this).text());
+
+});
+});
+</script>
+
+<div id="dialog" title="Agregar Avance">
+	Tarea: <b id="titulo">Tarea</b>
+<%= form_for(@shift) do |s| %>
+	<% @shift.errors.full_messages.each do |message|%>
+		<div class="be-alert white">*<%= message %></div>
+	<%end%>
+	<div class="field">
+		Descripcion
+		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
+	</div>
+	<div class="field">
+		Avance del Indicador
+		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
+	</div>
+	<%= s.hidden_field:labor_id, :value =>@labor %>
+	
+	
+	<div class="field" align='right'>
+		<%= s.submit "Guardar", class:"btn large-padding be-red" %>
+	</div>
+<%end%>
+</div>
