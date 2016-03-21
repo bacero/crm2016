@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
  devise_scope :user do
     authenticated  do
-       
+  resources :reports, only: [:index]     
   resources :states, only: [:index]
   resources :kind_properties, only: [:index]
   resources :properties
