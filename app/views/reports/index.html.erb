@@ -1,1 +1,178 @@
-helo mundo 
+<div style="width:80%; margin:0 auto;">
+	<br>
+		<div style="width:45%; margin:0 auto;">
+		<form action="/reports" method="get">
+			Fecha de Reporte
+		 <input type="text" id="fecha" name="date" class="form-control" value="<%= @date %>" />
+		 <div class="field" align='right'>
+		  <input type="submit" value="Generar" class:"btn large-padding be-red">
+		</div>
+		  
+		</form>
+		</div>
+	<br>
+<script type="text/javascript">
+$(function(){
+  $("#myTable1").tablesorter();
+  $("#myTable2").tablesorter();
+ 
+});
+</script>
+<h1>Reporte Semanal de Tareas</h1>
+<table style="width:80%; margin:0 auto;" id="myTable1">
+<thead>
+	<tr>
+		<th>#</th>
+		<th>Tipo</th>
+		<th>Area/Proyecto</th>
+		<th>Meta</th>
+		<th>Tarea</th>
+		<th>Inicio</th>
+		<th>Fin</th>
+		<th>Indicador</th>
+		<th>Observacion</th>
+		<th>Fecha</th>
+		<th>Responsable</th>
+	</tr>
+</thead>
+<tbody>
+
+<% x=0
+	@labor.each do |l| 
+	shift=LaborShift.find(l[1])
+	labor=Labor.find(shift.labor_id)
+	x=x+1
+	%>
+	<tr>
+		<td> <%= x %></td>
+		<td> <%= if labor.area_aim_id
+					"Area"
+				 else
+				 	"Projecto"
+				 end
+				 %></td>
+
+			
+		<td> <%= if labor.area_aim_id
+				labor.area_aim.area.name
+				end %>
+			<%= if labor.project_id
+					labor.project.name
+				end %>
+		</td>
+		<td> <%= if labor.area_aim_id
+					labor.area_aim.name
+				 elsif labor.project_id
+					labor.project.name
+				end
+			  %>
+		</td>
+		<td> <%= labor.name %></td>
+		<td> <%= labor.initiation %></td>
+		<td> <%= labor.ending %></td>
+		<td> <%= shift.advance %>/<%= labor.indicator %></td>
+		<td><%= shift.description %></td>
+		<td><%= shift.created_at.strftime("%d-%m-%Y") %></td>
+		<td>
+			<%= if labor.user_id
+					labor.user.username
+				end
+			  %>
+		</td>
+	</tr>
+<%end%>
+</tbody>
+</table>
+
+
+
+<script type="text/javascript">$(function() {
+			  $('#fecha').datepicker({dateFormat: 'yy-mm-dd'});
+			 
+			});
+			</script>
+
+<h1>Reporte Mensual Area/Proyecto</h1>
+
+<table style="width:80%; margin:0 auto;" id="myTable2">
+<thead>
+	<tr>
+		<th>#</th>
+		<th>Tipo</th>
+		<th>Area/Proyecto</th>
+		<th>Meta</th>
+		<th>Inicio</th>
+		<th>Fin</th>
+		<th>Indicador</th>
+		<th>Observacion</th>
+		<th>Fecha</th>
+		<th>Responsable</th>
+	</tr>
+</thead>
+<tbody>
+
+<%x=0
+ @aim.each do |l|
+ aim=LaborShift.find(l[1]) 
+ 	x=x+1
+ %>
+
+<tr>
+	<td><%=x%></td>
+	<td> <%= if aim.area_aim_id
+					"Area"
+				 else
+				 	"Projecto"
+				 end
+				 %></td>
+	
+	<td> <%= if aim.area_aim_id
+				aim.area_aim.area.name
+				end %>
+			<%= if aim.project_id
+					aim.project.name
+				end %>
+		</td>
+		<td> <%= if aim.area_aim_id
+					aim.area_aim.name
+				 elsif aim.project_id
+					aim.project.name
+				end
+			  %>
+		</td>
+	<td><%= if aim.area_aim_id
+					aim.area_aim.initiation
+				 elsif aim.project_id
+					aim.project.initiation
+				end
+			  %>
+	</td>
+	<td><%= if aim.area_aim_id
+					aim.area_aim.ending
+				 elsif aim.project_id
+					aim.project.ending
+				end
+			  %>
+	</td>
+	<td><%=aim.advance%> /	
+		<%= if aim.area_aim_id
+					aim.area_aim.indicator
+				 elsif aim.project_id
+					aim.project.indicator
+				end
+			  %>
+	</td>
+	
+	<td><%= aim.description %></td>
+	<td><%= aim.created_at.strftime("%d-%m-%Y") %></td>
+	<td>
+		<%= if aim.user_id
+					aim.user.username
+			end
+		%>
+		</td>
+</tr>
+<%end%>
+</tbody>
+</table>
+</div>
