@@ -1,6 +1,7 @@
 html,body{
 	margin: 0px;
 	font-family: 'Roboto', sans-serif;
+	background-color: #F1F2EB; 
 }
 .btn{
 	background-color: inherit;
@@ -17,10 +18,10 @@ a,a:visited{
 	text-decoration: none;
 }
 .be-red{
-	background-color: #4C6A8D;
+	background-color: #024959;
 }
 .be-alert{
-	background-color: #F14440;
+	background-color: #024959;
 }
 .white {
 	color: white;
@@ -85,7 +86,7 @@ ul, ol {
 				float:left;
 			}			
 			nav li a {
-				background-color:#4C6A8D;
+				background-color:#024959;
 				color:#fff;
 				text-decoration:none;
 				padding:10px 12px;
@@ -93,7 +94,7 @@ ul, ol {
 			}
 			
 			nav li a:hover {
-				background-color:#0C9DA9;
+				background-color:#037E8C;
 			}
 			
 			nav li ul {
@@ -118,7 +119,7 @@ ul, ol {
 a.crear {
   
     padding: 10px 15px;
-    background: #F14440;
+    background: #024959;
     color: #FFF;
    	border-radius: 10px;
 
@@ -149,4 +150,40 @@ table td {
     padding-top: 10px;
     font-size: 1.5em;
     
+}
+.well{
+	background-color: #FFFFFF; 
+	padding: 30px 30px 30px 30px;
+	border: 1px;
+	border-style: solid;
+    border-radius: 12px;
+    border-color: #8B9E98;
+}
+.tareas th{
+	background-color: #FFFFFF;
+	padding: 5px 5px 5px 5px;
+	font-size: 150%;
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+	
+}
+.tareas tr td {
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+.tareas tr:hover {background-color:#E0FFF5}
+.titulos{
+	font-size: 150%;
+	width: 20%;
+	font-weight: bold;
+}
+.welld{
+	background-color: #D9EAD3; 
+	padding: 30px 30px 30px 30px;
+	border: 1px;
+	border-style: solid;
+    border-radius: 12px;
+    border-color: #8B9E98;
 }

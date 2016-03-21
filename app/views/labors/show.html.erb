@@ -1,30 +1,30 @@
-<div style="width:60%; margin:0 auto;">
+<div style="width:60%; margin:0 auto; ">
 	
 	           <h1> <%= @labor.name %> </h1>
 	<% a=LaborShift.where("labor_id=#{@labor.id}").last 
 		e=LaborShift.where("labor_id=#{@labor.id}")
 	 
-	%>  
-	<div>
-		<table align="center" style="font-size:150%; width:60%;">
+	%>
+	<div class="welld tareas">
+		<table class align="center" style="width:98%; ">
 			<tr>
-				<td><b>Nombre</b></td><td><%= @labor.name %></td>
+				<td class="titulos">Nombre</td><td><%= @labor.name %></td>
 			</tr>
 			<tr>
-				<td><b>Descripcion</b></td><td><%= @labor.description %></td>
+				<td class="titulos">Descripcion</td><td><%= @labor.description %></td>
 			</tr>
 			
 			<tr>
-				<td><b>Inicio</b></td><td><%= @labor.initiation %></td>
+				<td class="titulos">Inicio</td><td><%= @labor.initiation %></td>
 			</tr>
 			<tr>
-				<td><b>Fin</b></td><td><%= @labor.ending  %></td>
+				<td class="titulos">Fin</td><td><%= @labor.ending  %></td>
 			</tr>
 			<tr>
-				<td><b>Asignado a </b></td><td><%=@asignado%></td>
+				<td class="titulos">Asignado a </td><td><%=@asignado%></td>
 			</tr>
 			<tr>
-				<td><b>Cliente</b></td>
+				<td class="titulos">Cliente</td>
 				<td>
 					<%if @labor.client %>
 						<%= @labor.client.name %>
@@ -34,12 +34,58 @@
 			</tr>
 		</table>
 		<br>
-		<table align="center" style="font-size:150%; width:60%;">
+		<table align="center"  class align="center" style="width:98%; ">
 		<tr>
-				<td><b>Descripcion Indicador</b></td><td><%= @labor.indicator_description %></td>
+				<td class="titulos">Descripcion Indicador</td><td><%= @labor.indicator_description %></td>
 			</tr>
 			<tr>
-				<td><b>Indicador</b></td><td><%= 
+				<td class="titulos">Indicador</td><td><%= 
+				if a
+					a.advance 
+				else
+					0
+				end
+				
+				%>/<%= @labor.indicator %></td>
+			</tr></table>
+	</div>
+	  <h1> <%= @labor.name %> </h1>
+	<br>  
+	<div class="well tareas">
+		<table class align="center" style="width:98%; ">
+			<tr>
+				<td class="titulos">Nombre</td><td><%= @labor.name %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Descripcion</td><td><%= @labor.description %></td>
+			</tr>
+			
+			<tr>
+				<td class="titulos">Inicio</td><td><%= @labor.initiation %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Fin</td><td><%= @labor.ending  %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Asignado a </td><td><%=@asignado%></td>
+			</tr>
+			<tr>
+				<td class="titulos">Cliente</td>
+				<td>
+					<%if @labor.client %>
+						<%= @labor.client.name %>
+					<%end%>
+
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center"  class align="center" style="width:98%; ">
+		<tr>
+				<td class="titulos">Descripcion Indicador</td><td><%= @labor.indicator_description %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Indicador</td><td><%= 
 				if a
 					a.advance 
 				else
@@ -50,14 +96,61 @@
 			</tr></table>
 	</div>
 	<br>
+
+	  <h1> <%= @labor.name %> </h1>
+
+	<table class="well tareas" align="center" style="width:100%; ">
+			<tr>
+				<td class="titulos">Nombre</td><td><%= @labor.name %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Descripcion</td><td><%= @labor.description %></td>
+			</tr>
+			
+			<tr>
+				<td class="titulos">Inicio</td><td><%= @labor.initiation %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Fin</td><td><%= @labor.ending  %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Asignado a </td><td><%=@asignado%></td>
+			</tr>
+			<tr>
+				<td class="titulos">Cliente</td>
+				<td>
+					<%if @labor.client %>
+						<%= @labor.client.name %>
+					<%end%>
+
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center"  class="well tareas" align="center" style="width:100%; ">
+		<tr>
+				<td class="titulos">Descripcion Indicador</td><td><%= @labor.indicator_description %></td>
+			</tr>
+			<tr>
+				<td class="titulos">Indicador</td><td><%= 
+				if a
+					a.advance 
+				else
+					0
+				end
+				
+				%>/<%= @labor.indicator %></td>
+			</tr></table>
+	
+	<br>
 <h2> HISTORIAL DE AVANCES </h2>
 	
-	<table style="width:100%">
-		<tr>
-			<th>Avance</th>
-			<th>Observaciones</th>
-			<th>Usuario</th>
-			<th>fecha</th>
+	<table style="width:100%" class="tareas">
+		<tr >
+			<th class="tareas">Avance</th>
+			<th class="tareas">Observaciones</th>
+			<th class="tareas">Usuario</th>
+			<th class="tareas">fecha</th>
 		</tr>
 	<% e.each do |ava|  %>
 		<tr>
@@ -78,21 +171,28 @@
 	<br>
 <h2> HISTORIAL DE CAMBIOS </h2>
 
-<div class="listado caja">
+<table style="width:100%" class="tareas">
+	<tr>
+		<th class="tareas" >Fecha</th>
+		<th class="tareas">Atributo</th>
+		<th class="tareas">Anterior</th>
+		<th class="tareas">Nuevo</th>
+	</tr>
 	<% @changes.each do |c|  %>
-		<p style="font-size:55%; ">
-			<b><%=c.created_at.strftime("%m-%d-%Y")%></b>: El atributo <b><%= c.property %></b> con valor:<b> <%=c.previus %></b> se cambio por <b><%=c.mint %></b></p>
+		<tr>
+			<td><%=c.created_at.strftime("%m-%d-%Y")%></td>
+			<td><%= c.property %></td>
+			<td><%=c.previus %></td>
+			<td><%=c.mint %></td>
+		</tr>
 	<%end%>
-</div>
+</table>
 	<br>
 
 
 
 <h2>COMENTARIOS</h2>
-
-
-<div>
-<div>
+<div class="well tareas">
 	<%= form_for(@comment) do |f| %>
 		<div class="field">
 		Crear Nuevo Comentario
@@ -102,24 +202,32 @@
 		<%= f.hidden_field:kind, :value => "2" %>
 		<div class="field" align='right'>
 
-			<%= f.submit "Guardar", class:"btn large-padding be-red" %>
+			<%= f.submit "Guardar", class:"btn large-padding " %>
 		</div>
 	<%end%>
-</div>
-<div>
+	<br>
+	<table style="width:100%" class="tareas">
+		<tr>
+			<th class="tareas" style="width:10%">Fecha</th>
+			<th class="tareas">Comentario</th>
+			<th class="tareas" style="width:15%">Usuario</th>
+		</tr>
 	<% @comnents.each do |o|  
-		u=""
-		if o.user
-			u=o.user.username
-		end
-		%>		
-	<div class="listado caja">
-		<%=o.description %><br>
-
-		<p class="lisp" align="right"><%= o.created_at.strftime("%d-%m-%y ")  %> By: <%= u %></p>
-	</div><br>
-<%end%>
+			u=""
+			if o.user
+				u=o.user.username
+			end
+			%>
+		<tr>
+			<td><%= o.created_at.strftime("%d-%m-%y ")  %></td>
+			<td><%=o.description %></td>
+			<td><%= u %></td>
+		</tr>		
+	<%end%>
+	</table>
 </div>
 
+
+	
 </div>
 
