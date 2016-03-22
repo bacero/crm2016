@@ -152,28 +152,41 @@ table td {
     
 }
 .well{
+	
+	padding: 30px 30px 30px 30px;
+	border: 1px;
+	border-style: solid;
+    border-radius: 5px;
+    border-color: #8B9E98;
+}
+.well table{
 	background-color: #FFFFFF; 
+}
+.wellc {
+	background-color: #FFFFFF;
 	padding: 30px 30px 30px 30px;
 	border: 1px;
 	border-style: solid;
     border-radius: 12px;
-    border-color: #8B9E98;
+    border-color: #8B9E98; 
+}
+div.tareas {
+	background-color: #1AB2A3;
 }
 .tareas th{
-	background-color: #FFFFFF;
+	background-color: #1AB2A3;
 	padding: 5px 5px 5px 5px;
 	font-size: 150%;
 	border: 1px;
 	border-style: solid;
     border-color: #8B9E98;
-	
 }
 .tareas tr td {
 	border: 1px;
 	border-style: solid;
     border-color: #8B9E98;
 }
-.tareas tr:hover {background-color:#E0FFF5}
+.tareas tr:hover {background-color:#5FFFDD}
 .titulos{
 	font-size: 150%;
 	width: 20%;
@@ -186,3 +199,66 @@ table td {
 	font-weight: bold;
 	background-color: #F1F2EB; 
 }
+.proyectos tr td {
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+
+div.proyectos {
+	background-color: #F4CCCC;
+}
+.proyectos tr:hover {background-color:#FF9E9D}
+
+.proyectos th{
+	background-color: #F4CCCC;
+	padding: 5px 5px 5px 5px;
+	font-size: 150%;
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+
+.metas tr td {
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+
+.mestas tr td {
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+
+div.metas {
+	background-color: #CFE2F3;
+}
+.metas tr:hover {background-color:#21B8B4}
+
+.metas th{
+	background-color: #CFE2F3;
+	padding: 5px 5px 5px 5px;
+	font-size: 150%;
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+.metas tr td {
+	border: 1px;
+	border-style: solid;
+    border-color: #8B9E98;
+}
+
+table.normal th{
+	background-color: #FFFFFF;
+	padding: 5px 5px 5px 5px;
+	font-size: 150%;
+	border: 1px;
+	border-style: solid;
+    border-color: black;
+}
+.nob{
+	border: 0; 
+}
+.normal tr:hover {background-color:#21B8B4}

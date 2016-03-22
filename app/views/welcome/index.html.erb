@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  	<table style="width:100%"  id="myTable2">
+  	<table style="width:100%" class="normal" id="myTable2">
   	<thead>
   		<tr>
   			<th>Nombre</th>
@@ -35,7 +35,10 @@
 		 %>
 			<tr>
 				
-			<td><button class="abrir" style="background:#FFFFFF;border:none;text-align: left;" value="<%=l.id%>"><%=l.name%></button></td>
+			<td>
+				<%= link_to l.name,labor_path(l.id) %>
+				
+			</td>
 
 	    		<td><%=l.description %></td>
 	    		<% if l.initiation && l.ending %>
@@ -76,9 +79,9 @@
 						<td> <%= l.area_aim.area.name %> </td>	
 					<%end%>	
 				<%end%>
-				
-				
-				<td><%= link_to "Ver Tarea Completa",labor_path(l.id) %></td>
+				<td class="nob">
+					<button class="abrir" style="background:#FFFFFF;border:none;text-align: left;" value="<%=l.id%>">Agregar Avance</button>
+				</td>
 			</tr>
 		
 		
@@ -116,38 +119,39 @@ $(function () {
 $("#dialog").dialog({
 autoOpen: false,
 modal: true
-});
+}).prev(".ui-dialog-titlebar").css("background","#21B8B4");
+
 $(".abrir")
 .button()
 .click(function () {
 $("#dialog").dialog("option", "width", 400);
 $("#dialog").dialog("open");
 $("#labor_shift_labor_id").val(this.value);
-$("#titulo").text($(this).text());
+
 
 });
 });
 </script>
 
 <div id="dialog" title="Agregar Avance">
-	Tarea: <b id="titulo">Tarea</b>
+	
 <%= form_for(@shift) do |s| %>
 	<% @shift.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
 	<%end%>
 	<div class="field">
-		Descripcion
-		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
+		Observacion
+		<%= s.text_field:description, placeholder: "Ingrese Observacion", class:"form-control"%>
 	</div>
 	<div class="field">
-		Avance del Indicador
-		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
+		Avance
+		<%= s.number_field:advance,min:1, placeholder: "Cantidad", :class => 'text_field', :step => 'any',class:"form-control" %>
 	</div>
 	<%= s.hidden_field:labor_id, :value =>@labor %>
 	
 	
 	<div class="field" align='right'>
-		<%= s.submit "Guardar", class:"btn large-padding be-red" %>
+		<%= s.submit "Guardar", class:"btn large-padding" %>
 	</div>
 <%end%>
 </div>

@@ -1,6 +1,6 @@
 <div style="width:80%; margin:0 auto;">
 <h1>Clientes</h1>
-<table align="center" style="width:80%;font-size:150%;">
+<table align="center"  class="normal">
 	<tr>
 		<th>Nombre</th>
 		<th>Descripcion</th>
@@ -17,19 +17,19 @@
 		 %>
 
 		<td><%= cli.type_client.name %></td>
-		<td><span class="editar">Creado:<%= input %>
+		<td><span>Creado:<%= input %>
 		<% 
 		   input = cli.updated_at
 		   input=input.strftime("%d/%m/%y") # => 05:21
 		 %>
 		
-		  Actualizado:<%= input %></span></td>
+		  Actualizado:<%= input %></td>
 		 </tr>
 
 <%end%>
 </table>
 <br>	
 <div class=' listado izquierdo'>
-	<%= link_to 'Crear Nuevo', new_client_path,:class => "crear" %>
+	<%= link_to 'Crear Nuevo', new_client_path %>
 </div>
 </div>

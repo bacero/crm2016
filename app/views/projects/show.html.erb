@@ -1,26 +1,27 @@
 <div style="width:60%; margin:0 auto;">
 <h1> <%= @p.name %> </h1>
-<div>
+<div class="well proyectos">
 	<% a=LaborShift.where("project_id=#{@p.id}").last 
 		e=LaborShift.where("project_id=#{@p.id}")
 	 
 	%>  
-		<table align="center" style="font-size:150%; width:60%;" >
+
+		<table class align="center" style="width:98%; ">
 			<tr>
-				<td><b>Nombre</b></td><td><%= @p.name %></td>
+				<td class="titulos">Nombre<td><%= @p.name %></td>
 			</tr>
 			<tr>
-				<td><b>Descripcion</b></td><td><%= @p.description %></td>
+				<td class="titulos">Descripcio</td><td><%= @p.description %></td>
 			</tr>
 			
 			<tr>
-				<td><b>Inicio</b></td><td><%= @p.initiation %></td>
+				<td class="titulos">Inicio</td><td><%= @p.initiation %></td>
 			</tr>
 			<tr>
-				<td><b>Fin</b></td><td><%= @p.ending  %></td>
+				<td class="titulos">Fin</td><td><%= @p.ending  %></td>
 			</tr>
 			<tr>
-				<td><b>Responsable</b></td><td>
+				<td class="titulos">Responsable</td><td>
 				<%= if @p.user
 						@p.user.username
 					end
@@ -29,9 +30,9 @@
 			</tr>
 		</table>
 		<br>
-		<table align="center" style="font-size:150%; width:60%;">
+		<table align="center"  class align="center" style="width:98%; ">
 			<tr>
-				<td><b>Indicador</b></td><td><%= 
+				<td class="titulos">Indicador</td><td><%= 
 				if a
 					a.advance 
 				else
@@ -41,46 +42,48 @@
 				%>/<%= @p.indicator %></td>
 			</tr>
 			<tr>
-				<td><b>Observacion</b></td>
+				<td class="titulos">Observacion</td>
 				<td><%= @p.observation  %></td>
 			</tr>
 		</table>
-	</div>
-<div style="width:60%; margin:0 auto;">
-<h1><%= @name %></h1>
-<%= form_for(@shift) do |s| %>
-	<% @shift.errors.full_messages.each do |message|%>
-		<div class="be-alert white">*<%= message %></div>
-	<%end%>
-	<div class="field">
-		Avance
-		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
-	</div>
-	<div class="field">
-		Descripcion
-		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
-	</div>
-	
-	<%= s.hidden_field:project_id, :value =>@p.id %>
-	
-	<div class="field" align='right'>
-		<%= s.submit "Guardar", class:"btn large-padding" %>
-	</div>
-<%end%>
+		<div class="field" align='right'>
+			<%= link_to "Editar",edit_project_path(@p.id) %>
+		</div>
 </div>
+<br>
+<div class="wellc">
+		<%= form_for(@shift) do |s| %>
+			<% @shift.errors.full_messages.each do |message|%>
+				<div class="be-alert white">*<%= message %></div>
+			<%end%>
+			<div class="field">
+				Avance
+				<%= s.number_field:advance,min:1, placeholder: "Ingrese Cantidad", :class => 'text_field', :step => 'any',class:"form-control" %>
+			</div>
+			<div class="field">
+				Observacion
+				<%= s.text_field:description, placeholder: "Ingrese Observacion", class:"form-control"%>
+			</div>
+			
+			<%= s.hidden_field:project_id, :value =>@p.id %>
+			
+			<div class="field" align='right'>
+				<%= s.submit "Guardar", class:"btn large-padding" %>
+			</div>
+		<%end%>
+</div>
+
 <h2>TAREAS</h2>
 
-
-
-<table id="myTable" style="width:100%;" >
+<table id="myTable" style="width:100%" class="proyectos" >
 	<thead>
 	<tr>
-		<th>Nombre</th>
-		<th style="width:40%;">Descripcion</th>
-		<th>Inicio</th>
-		<th>Fin</th>
-		<th>Indicador</th>
-		<th>Usuario</th>
+		<th class="proyectos">Nombre</th>
+		<th class="proyectos" style="width:40%;">Descripcion</th>
+		<th class="proyectos">Inicio</th>
+		<th class="proyectos">Fin</th>
+		<th class="proyectos">Indicador</th>
+		<th class="proyectos">Usuario</th>
 	</tr>
 </thead>
 <tbody>
@@ -123,12 +126,12 @@
 
 <h2> HISTORIAL DE AVANCES </h2>
 	
-	<table style="width:100%;">
+<table id="myTable" style="width:100%" class="proyectos" >
 		<tr>
-			<th>Avance</th>
-			<th>Observaciones</th>
-			<th>Usuario</th>
-			<th>fecha</th>
+			<th class="proyectos">Avance</th>
+			<th class="proyectos">Observaciones</th>
+			<th class="proyectos">Usuario</th>
+			<th class="proyectos">fecha</th>
 		</tr>
 	<% e.each do |ava|  %>
 		<tr>
@@ -159,7 +162,7 @@ $(function () {
 $("#dialog").dialog({
 autoOpen: false,
 modal: true
-});
+}).prev(".ui-dialog-titlebar").css("background","#F4CCCC");
 $("#abrir")
 .button()
 .click(function () {
@@ -210,7 +213,7 @@ $("#dialog").dialog("open");
 		<%= l.hidden_field:project_id, :value => @p.id %>
 				
 		<div class="field" align='right'>
-			<%= l.submit "Guardar", class:"btn large-padding be-red" %>
+			<%= l.submit "Guardar", class:"btn large-padding " %>
 		</div>
 	<%end%>
 </div>

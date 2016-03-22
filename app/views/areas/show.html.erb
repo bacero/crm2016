@@ -1,6 +1,6 @@
 <div style="width:60%; margin:0 auto;">
 	<h1> <%= @area.name %> </h1>
-	    
+<div style="display:none">	    
 <h2>GRUPO DE TRABAJO</h2>
 	       
 
@@ -12,7 +12,7 @@
 	<%end%>
 	
 
-<div>
+
 	<%= form_for(@group) do |g| %>
 		<% @group.errors.full_messages.each do |message|%>
 		<div class="be-alert white">*<%= message %></div>
@@ -29,7 +29,7 @@
 	<%end%>
 </div>
 <h2>METAS</h2>
-<table style="width:100%" id="myTable">
+<table style="width:100%" class="normal" id="myTable">
 <thead>
 		<tr>
 			<th>Nombre</th>
@@ -51,7 +51,7 @@
 		<% 
 			else
 				%>
-				<td colspan='2' >Meta Recurrente</td>
+				<td colspan='2' style="text-align:center;" >Meta Recurrente</td>
 		  <% end %>
 
 		<td>
@@ -72,7 +72,7 @@
 			 %> / <%=m.indicator %>
 		</td>
 
-		<td><%= link_to "Editar",edit_area_aim_path(m) %> </td>
+		
 </tr>
 <%end%>
 </tbody>

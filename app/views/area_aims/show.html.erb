@@ -1,25 +1,26 @@
 <div style="width:60%; margin:0 auto;">
 <h1> <%= @aim.name %> </h1>
-<div>
+<div class="well metas">
+
 	<% a=LaborShift.where("area_aim_id=#{@aim.id}").last 
 		e=LaborShift.where("area_aim_id=#{@aim.id}")
 	 
 	%>  
-		<table align="center" style="font-size:150%; width:60%;" >
+		<table class align="center" style="width:98%; ">
 			<tr>
-				<td><b>Nombre</b></td><td><%= @aim.name %></td>
+				<td class="titulos">Nombre</td><td><%= @aim.name %></td>
 			</tr>
 			<tr>
-				<td><b>Descripcion</b></td><td><%= @aim.description %></td>
+				<td class="titulos">Descripcion</td><td><%= @aim.description %></td>
 			</tr>
 			<tr>
-				<td><b>Inicio</b></td><td><%= @aim.initiation %></td>
+				<td class="titulos">Inicio</td><td><%= @aim.initiation %></td>
 			</tr>
 			<tr>
-				<td><b>Fin</b></td><td><%= @aim.ending  %></td>
+				<td class="titulos">Fin</td><td><%= @aim.ending  %></td>
 			</tr>
 			<tr>
-				<td><b>Responsable</b></td><td>
+				<td class="titulos">Responsable</td><td>
 				<%= if @aim.user
 						@aim.user.username
 					end
@@ -28,9 +29,9 @@
 			</tr>
 		</table>
 		<br>
-		<table align="center" style="font-size:150%; width:60%;">
+		<table class align="center" style="width:98%; ">
 			<tr>
-				<td><b>Indicador</b></td><td><%= 
+				<td class="titulos">Indicador</td><td><%= 
 				if a
 					a.advance 
 				else
@@ -40,12 +41,16 @@
 				%>/<%= @aim.indicator %></td>
 			</tr>
 			<tr>
-				<td><b>Observacion</b></td>
+				<td class="titulos">Observacion</td>
 				<td><%= @aim.observation  %></td>
 			</tr>
 		</table>
+		<div class="field" align='right'>
+			<td><%= link_to "Editar",edit_area_aim_path(@aim.id) %> </td>
+		</div>
 	</div>
-<div style="width:60%; margin:0 auto;">
+<br>
+<div class="wellc">
 <h1><%= @name %></h1>
 <%= form_for(@shift) do |s| %>
 	<% @shift.errors.full_messages.each do |message|%>
@@ -53,11 +58,11 @@
 	<%end%>
 	<div class="field">
 		Avance
-		<%= s.number_field:advance,min:1, placeholder: "Cantidad de Indicadores", :class => 'text_field', :step => 'any',class:"form-control" %>
+		<%= s.number_field:advance,min:1, placeholder: "Ingrese Cantidad", :class => 'text_field', :step => 'any',class:"form-control" %>
 	</div>
 	<div class="field">
-		Descripcion
-		<%= s.text_field:description, placeholder: "Ingrese Descripcion del Avance", class:"form-control"%>
+		Observacion
+		<%= s.text_field:description, placeholder: "Ingrese 	Observacion", class:"form-control"%>
 	</div>
 	
 	<%= s.hidden_field:area_aim_id, :value =>@aim.id %>
@@ -69,16 +74,16 @@
 </div>
 <h2>TAREAS</h2>
 	        
-<table id="myTable" style="width:100%;">
+<table id="myTable" style="width:100%" class="metas" >
 	<thead>
 	<tr>
-		<th>Nombre</th>
-		<th style="width:40%;">Descripcion</th>
-		<th>Inicio</th>
-		<th>Fin</th>
-		<th>Indicador</th>
-		<th>Responsable</th>
-		<th>Estado</th>
+		<th class="metas">Nombre</th>
+		<th class="metas" class="metas" style="width:40%;">Descripcion</th>
+		<th class="metas" class="metas">Inicio</th>
+		<th class="metas" class="metas">Fin</th>
+		<th class="metas" class="metas">Indicador</th>
+		<th class="metas" class="metas">Responsable</th>
+		<th class="metas" class="metas">Estado</th>
 	</tr>
 </thead>
 <tbody>
@@ -96,9 +101,10 @@
 		  <% end %>
 		<td>
 			<%=
+			y=0
 			if l.labor_shifts.present?
 					l.labor_shifts.last.advance
-					
+					y=l.labor_shifts.last.advance
 				else
 					0
 				end
@@ -111,7 +117,16 @@
 					end
 				
 				%></td>	
-		<td><%= link_to "Editar",edit_labor_path(l.id) %></td>
+		<td><%= if l.indicator<=y
+				  		"Done"
+					elsif DateTime.now.to_date > l.ending
+							"Overdue"
+					elsif DateTime.now.to_date < l.initiation
+							"Not Initiated"
+						else
+							"Active"
+				end%>
+		</td>
 <%end%>
 </tbody>
 </table>
@@ -121,12 +136,12 @@
 
 <h2> HISTORIAL DE AVANCES </h2>
 	
-	<table style="width:100%;">
+	<table  style="width:100%" class="metas" >
 		<tr>
-			<th>Avance</th>
-			<th>Observaciones</th>
-			<th>Usuario</th>
-			<th>fecha</th>
+			<th class="metas">Avance</th>
+			<th class="metas">Observaciones</th>
+			<th class="metas">Usuario</th>
+			<th class="metas">fecha</th>
 		</tr>
 	<% e.each do |ava|  %>
 		<tr>
@@ -212,7 +227,7 @@ $("#dialog").dialog("open");
 		<%= l.hidden_field:area_aim_id, :value => @aim.id %>
 				
 		<div class="field" align='right'>
-			<%= l.submit "Guardar", class:"btn large-padding be-red" %>
+			<%= l.submit "Guardar", class:"btn large-padding " %>
 		</div>
 	<%end%>
 </div>

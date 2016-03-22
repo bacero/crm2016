@@ -1,6 +1,6 @@
-<div style="width:80%; margin:0 auto;">
+<div style="width:60%; margin:0 auto;">
 <h1>Areas</h1>
-<table align="center" id="myTable"  >
+<table align="center" class="normal" style="width:100%" id="myTable"  >
 <thead>
 	<tr>
 		<th>Nombre</th>
@@ -12,7 +12,7 @@
 	<tr>
 		<td><b><%= link_to a.name,a %></b></td>
 		<td><%= a.description %></td>
-		<td><%= link_to "Editar",edit_area_path(a) %> </td>
+		<td><%= link_to "Editar",edit_area_path(a) %> </td>	
 	</tr>
 <%end%>
 </tbody>
