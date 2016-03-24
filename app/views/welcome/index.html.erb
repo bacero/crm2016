@@ -58,6 +58,7 @@
 	    		<td><%=l.indicator_description%></td>
 	    		<td style="text-align: center;";>
 	    			<%
+	    				k= Date.parse(a.created_at.strftime("%y-%m-%d"))
 	    				#pasar esto a una nuvea funcion de tareas recurrentes 
 	    				if r=1
 	    					if DateTime.now.to_date.cweek
