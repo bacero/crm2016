@@ -96,20 +96,30 @@
 			<td><%=l.initiation.strftime("%m-%d-%Y")  %></td><td> <%=l.ending.strftime("%m-%d-%Y")  %> </td>
 		<% 
 			else
+				r=0
 				%>
 				<td colspan='2'>Tarea Recurrente</td>
 		  <% end %>
 		<td>
-			<%=
+			<%
 			y=0
 			if l.labor_shifts.present?
-					l.labor_shifts.last.advance
-					y=l.labor_shifts.last.advance
-				else
-					0
-				end
-			%>
-			/ <%=l.indicator%>
+					if r=1
+		    			if Date.parse(l.labor_shifts.last.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
+		    						%>
+		    						<%="0" %>
+		    		  <%else%>
+		    			<%= l.labor_shifts.last.advance %>
+		    		  <%end
+		    		else%>
+		    			<%= 
+		    				y=l.labor_shifts.last.advance
+		    			%>
+		    		<%end
+		   	else %>
+		   		<%= 0 %>
+		    <%end %>
+				/ <%=l.indicator%>
 		
 		</td>
 		<td><%= if l.user
@@ -117,14 +127,20 @@
 					end
 				
 				%></td>	
-		<td><%= if l.indicator<=y
-				  		"Done"
-					elsif DateTime.now.to_date > l.ending
-							"Overdue"
-					elsif DateTime.now.to_date < l.initiation
-							"Not Initiated"
-						else
-							"Active"
+
+		<td><%= 
+				if l.ending && l.initiation
+					if l.indicator<=y 
+					  		"Done"
+						elsif DateTime.now.to_date > l.ending
+								"Overdue"
+						elsif DateTime.now.to_date < l.initiation
+								"Not Initiated"
+							else
+								"Active"
+						end
+				else
+					"Active"
 				end%>
 		</td>
 <%end%>
