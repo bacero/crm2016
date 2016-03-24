@@ -1,8 +1,7 @@
-<%=
-	    				require 'date'
-	    				DateTime.now.to_date.cweek
+<% 
+	require 'date' 
 %>
-	    			
+	    				
 <div style="width:80%; margin:0 auto;">
 <h1>Hi <%= current_user.username %></h1>
 <p>
@@ -58,6 +57,19 @@
 	    		<%end%>
 	    		<td><%=l.indicator_description%></td>
 	    		<td style="text-align: center;";>
+	    			<%
+	    				#pasar esto a una nuvea funcion de tareas recurrentes 
+	    				if r=1
+	    					if DateTime.now.to_date.cweek
+	    						%>
+	    						<%="0" %>
+	    				  <%else%>
+	    						<%= h %>
+	    				  <%end
+	    				else%>
+							<%= h %>
+	    					
+	    			<%  end%>
 	    			
 					 / <%= l.indicator  %>
 				</td>
