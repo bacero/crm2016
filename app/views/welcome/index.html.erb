@@ -53,21 +53,7 @@
 	    		<%end%>
 	    		<td><%=l.indicator_description%></td>
 	    		<td style="text-align: center;";>
-	    			<%
-	    				#pasar esto a una nuvea funcion de tareas recurrentes 
-	    				if r=1
-	    					if Date.parse(a.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
-	    						%>
-	    						<%="0" %>
-	    				  <%else%>
-	    						<%= h %>
-	    				  <%end
-	    				else%>
-							<%= h %>
-	    					
-	    			<%  end%>
 	    			
-					 / <%= l.indicator  %>
 				</td>
 				<%	if l.indicator<=h %>
 						<td> Terminado </td>
