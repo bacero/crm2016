@@ -92,17 +92,29 @@
 		<tr>
 			<td><%= link_to l.name,l %></td>
 			<td><%=l.description %></td>
-		<% if l.initiation && l.ending %>
+		<% r=0
+			if l.initiation && l.ending %>
 			<td><%=l.initiation.strftime("%m-%d-%Y")  %></td><td> <%=l.ending.strftime("%m-%d-%Y")  %> </td>
 		<% 
 			else
+				r=1
 				%>
-				<th colspan='2'>Tarea recurrente</th>
+				<td colspan='2'>Tarea recurrente</td>
 		  <% end %>
 		<td> 
 			<%=
+				#pasar esto a una nuvea funcion de tareas recurrentes 
 				if l.labor_shifts.present?
-					l.labor_shifts.last.advance
+					if r=1
+						if Date.parse(l.labor_shifts.last.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
+							0
+						else
+							l.labor_shifts.last.advance
+						end
+					else
+						l.labor_shifts.last.advance
+					end
+										
 					
 				else
 					0

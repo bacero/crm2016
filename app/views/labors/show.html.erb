@@ -13,12 +13,30 @@
 				<td class="titulos">Descripcion</td><td><%= @labor.description %></td>
 			</tr>
 			
-			<tr>
-				<td class="titulos">Inicio</td><td><%= @labor.initiation %></td>
-			</tr>
-			<tr>
-				<td class="titulos">Fin</td><td><%= @labor.ending  %></td>
-			</tr>
+			<%	r=0
+				if @labor.initiation &&  @labor.ending %>
+					<tr>
+						<td class="titulos">Inicio</td><td><%= @labor.initiation %></td>
+					</tr>
+					<tr>
+						<td class="titulos">Fin</td><td><%= @labor.ending  %></td>
+					</tr>
+			<%else
+					r=1
+					%>
+					<tr>
+						<td class="titulos">Inicio</td><td rowspan="2">Tarea Recurrente</td>
+					</tr>
+					<tr>
+						<td class="titulos">Fin</td>
+					</tr>
+			<%	end
+			%>
+
+			
+
+
+
 			<tr>
 				<td class="titulos">Asignado a </td><td><%=@asignado%></td>
 			</tr>
@@ -40,14 +58,27 @@
 				<td class="titulos">Descripcion Indicador</td><td><%= @labor.indicator_description %></td>
 			</tr>
 			<tr>
-				<td class="titulos">Indicador</td><td><%= 
-				if a
-					a.advance 
-				else
-					0
-				end
-				
-				%>/<%= @labor.indicator %></td>
+				<td class="titulos">Indicador</td>
+				<td>
+					<%= 
+						if a
+							#pasar esto a una nuvea funcion de tareas recurrentes 
+							if r=1
+								if Date.parse(a.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
+									0
+								else
+									a.advance 
+								end
+							else
+								a.advance 	
+							end
+							
+						else
+							0
+						end
+						
+						%>/<%= @labor.indicator %>
+				</td>
 			</tr></table>
 		<div class="field" align='right'>
 			<%= link_to "Editar",edit_labor_path(@labor.id) %>

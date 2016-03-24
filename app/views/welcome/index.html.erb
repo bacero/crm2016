@@ -41,16 +41,32 @@
 			</td>
 
 	    		<td><%=l.description %></td>
-	    		<% if l.initiation && l.ending %>
+	    		<% r=0
+	    			if l.initiation && l.ending %>
 	    			<td><%=	l.initiation.strftime("%d-%m-%Y") %></td>
 	    			<td><%= l.ending.strftime("%d-%m-%Y")   %></td>
-	    		<% else%>
+	    		<% else
+	    			r=1
+	    			%>
 	    			<td colspan='2'>Tarea Recurrente</td>
 
 	    		<%end%>
 	    		<td><%=l.indicator_description%></td>
 	    		<td style="text-align: center;";>
-	    			<%= h %>
+	    			<%
+	    				#pasar esto a una nuvea funcion de tareas recurrentes 
+	    				if r=1
+	    					if Date.parse(a.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
+	    						%>
+	    						<%="0" %>
+	    				  <%else%>
+	    						<%= h %>
+	    				  <%end
+	    				else%>
+							<%= h %>
+	    					
+	    			<%  end%>
+	    			
 					 / <%= l.indicator  %>
 				</td>
 				<%	if l.indicator<=h %>
@@ -155,3 +171,4 @@ $("#labor_shift_labor_id").val(this.value);
 	</div>
 <%end%>
 </div>
+
