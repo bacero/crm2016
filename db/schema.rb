@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320040214) do
+ActiveRecord::Schema.define(version: 20160324202548) do
 
   create_table "area_aims", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -46,7 +46,10 @@ ActiveRecord::Schema.define(version: 20160320040214) do
     t.text     "creator",     limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
   end
+
+  add_index "areas", ["user_id"], name: "index_areas_on_user_id", using: :btree
 
   create_table "client_activities", force: :cascade do |t|
     t.text     "description", limit: 65535
@@ -232,6 +235,7 @@ ActiveRecord::Schema.define(version: 20160320040214) do
   add_foreign_key "area_aims", "states"
   add_foreign_key "area_aims", "users"
   add_foreign_key "area_groups", "areas"
+  add_foreign_key "areas", "users"
   add_foreign_key "client_activities", "clients"
   add_foreign_key "client_properties", "clients"
   add_foreign_key "client_properties", "properties"

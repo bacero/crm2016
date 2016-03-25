@@ -33,11 +33,23 @@
     	
 		<% a=LaborShift.where("labor_id=#{l.id}").last
 			h=0
+			
 			if a
 				h=a.advance
+				if Date.parse(a.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
+					%>
+					<tr class="atrasado">
+				<%else %>	
+					<tr>	
+				<%end
+			else
+				%>
+				<tr>
+			<% 
 			end
+
 		 %>
-			<tr>
+			
 				
 			<td>
 				<%= link_to l.name,labor_path(l.id) %>
@@ -179,4 +191,29 @@ $("#labor_shift_labor_id").val(this.value);
 	</div>
 <%end%>
 </div>
+<br>
+<% if @ultimate
+	if @ultimate.count>0%>
+		<div id="dialog-message" title="Nuevas Tareas Asignadas">
+  		<p>
+		 <%@ultimate.each do |u| %>
+			<span class="ui-icon ui-icon-check" style="float:left; margin:0 7px 50px 0;"></span><%= u.name %>
+		<%end%>
+		</p>
+		</div>
+		<script>
+		  $(function() {
+		    $( "#dialog-message" ).dialog({
+		      modal: true
+		    }).prev(".ui-dialog-titlebar").css("background","#21B8B4");
+		  });
+		  </script>
+  <%end
+end%>
+
+<!-- <div style="position: fixed; left:0px; top:100px">fink</div> -->
+  
+
+
+
 

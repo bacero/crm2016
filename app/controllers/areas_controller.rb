@@ -8,6 +8,7 @@ class AreasController < ApplicationController
 	end
 	def create
 		@area=Area.new(area_params)
+		@area.user_id=current_user.id
 		if @area.save
 			redirect_to @area
 		else
@@ -33,6 +34,6 @@ class AreasController < ApplicationController
 	end
 	private
 	def area_params
-		params.require(:area).permit(:name,:description,:creator)
+		params.require(:area).permit(:name,:description,:user_id)
 	end
 end
