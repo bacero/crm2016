@@ -84,6 +84,7 @@
 		<th class="metas" class="metas">Indicador</th>
 		<th class="metas" class="metas">Responsable</th>
 		<th class="metas" class="metas">Estado</th>
+		<th class="metas">Visualizacion</th>
 	</tr>
 </thead>
 <tbody>
@@ -142,6 +143,9 @@
 				else
 					"Active"
 				end%>
+		</td>
+		<td>
+			<%= l.state.name %>
 		</td>
 <%end%>
 </tbody>

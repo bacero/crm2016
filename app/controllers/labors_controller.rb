@@ -1,6 +1,7 @@
 class LaborsController < ApplicationController
 	def create
 		@labor=Labor.new(labor_params)
+		@labor.state_id=1
 		if @labor.save
 			if params[:labor][:project_id]
 			   r = Project.find(params[:labor][:project_id])
@@ -55,7 +56,11 @@ class LaborsController < ApplicationController
 			change = LaborChange.new(:property => "Usuario", :previus => @labor.user_id,:mint=>params[:labor][:user_id],:labor_id=>params[:id])
 			change.save
 		end
-
+		if params[:labor][:state_id] == "0"
+			@labor.state_id=2
+		else
+			@labor.state_id=1	
+		end
 		if @labor.update(labor_params)
 			redirect_to @labor
 		else
@@ -79,6 +84,6 @@ class LaborsController < ApplicationController
 	end
 	private
 	def labor_params
-		params.require(:labor).permit(:name,:description,:indicator,:indicator_description,:ending,:initiation,:area_aim_id,:project_id,:state_id,:client_id,:user_id)
+		params.require(:labor).permit(:name,:description,:indicator,:indicator_description,:ending,:initiation,:area_aim_id,:project_id,:client_id,:user_id)
 	end
 end

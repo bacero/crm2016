@@ -31,7 +31,11 @@
 		<div class="field">
 		    Usuario Asignado
 		    <%= l.collection_select :user_id, User.all, :id,:username, {prompt: 'Seleccione Usuario'}, class:"form-control" %>
-		  </div>
+		</div>
+		<div class="field">
+		    Tarea Activa
+		    <%= l.check_box :state_id %>
+		 </div>
 		
 		<%= l.hidden_field:area_aim_id %>
 				

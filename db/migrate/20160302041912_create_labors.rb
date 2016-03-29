@@ -10,7 +10,6 @@ class CreateLabors < ActiveRecord::Migration
       t.references :area_aim, index: true, foreign_key: true
       t.references :project, index: true, foreign_key: true
       t.references :state, index: true, foreign_key: true
-
       t.timestamps null: false
     end
   end

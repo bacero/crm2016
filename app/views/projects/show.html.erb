@@ -84,6 +84,7 @@
 		<th class="proyectos">Fin</th>
 		<th class="proyectos">Indicador</th>
 		<th class="proyectos">Usuario</th>
+		<th class="proyectos">Visualizacion</th>
 	</tr>
 </thead>
 <tbody>
@@ -126,6 +127,9 @@
 						l.user.username
 				end
 			%>
+			</td>
+			<td>
+				<%= l.state.name  %>
 			</td>	
 		<td><%= link_to "Editar",edit_labor_path(l.id) %></td>
 <%end%>
