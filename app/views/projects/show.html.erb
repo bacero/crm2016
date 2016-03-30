@@ -106,7 +106,7 @@
 			<%=
 				#pasar esto a una nuvea funcion de tareas recurrentes 
 				if l.labor_shifts.present?
-					if r=1
+					if r==1
 						if Date.parse(l.labor_shifts.last.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
 							0
 						else

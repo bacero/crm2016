@@ -63,7 +63,7 @@
 	    			<td><%= l.ending.strftime("%d-%m-%Y")   %></td>
 	    		<% else
 	    			r=1
-	    			%>
+	    		%>
 	    			<td colspan='2'>Tarea Recurrente</td>
 
 	    		<%end%>
@@ -72,7 +72,7 @@
 	    			<%
 	    				#pasar esto a una nuvea funcion de tareas recurrentes 
 	    				if l.labor_shifts.present?
-		    				if r=1
+		    				if r==1
 		    					if Date.parse(a.created_at.strftime("%y-%m-%d")).cweek<DateTime.now.to_date.cweek
 		    						%>
 		    						<%="0" %>
